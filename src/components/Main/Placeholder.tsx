@@ -3,7 +3,7 @@ import "./Placeholder.css";
 const Placeholder = () => {
   return (
     <div className="main">
-      <h1>Coming Soon!</h1>
+      <h1>Website under Maintenance!</h1>
     </div>
   );
 };

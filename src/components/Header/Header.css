@@ -1,8 +1,31 @@
 .header {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
+  background-color: #3e3e3e;
   color: white;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.navbar-list {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  padding: 15px;
+  text-decoration: none;
+}
+
+.navbar-item:hover {
+  cursor: pointer;
+  background-color: #303030;
+  color: #909090;
+}
+
+.theme-toggle {
+    padding: 15px;
 }

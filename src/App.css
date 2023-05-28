@@ -1,12 +1,9 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
-  position: relative;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
+:root {
+  background-color: #625C5C;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
-:root {
-  background-color: #242424;
+a {
+  all: unset;
 }
