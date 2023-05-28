@@ -1,7 +1,7 @@
 import "./App.css";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import Placeholder from "./components/Placeholder/Placeholder";
+import Placeholder from "./components/Main/Placeholder";
 
 const App = () => {
   return (
