@@ -29,3 +29,9 @@
 .theme-toggle {
     padding: 15px;
 }
+
+.logo:hover {
+    cursor:pointer;
+    background-color: #3e3e3e;
+    color: white;
+}

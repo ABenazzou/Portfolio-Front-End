@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="header">
       <ul className="navbar-list">
-        <li className="navbar-item">
+        <li className="navbar-item logo">
           <Link to="/">Logo Placeholder</Link>
         </li>
         <li className="navbar-item">
