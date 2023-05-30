@@ -15,7 +15,8 @@ import Resume from "./components/Resume/Resume";
 import Contact from "./components/Contact/Contact";
 
 const App = () => {
-  const [maintenance, setMaintenance] = useState(false);
+  const [maintenance, setMaintenance] = useState(true);
+
 
   return (
     <Router>
