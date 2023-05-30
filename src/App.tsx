@@ -2,11 +2,10 @@ import { useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import Placeholder from "./components/Main/Placeholder";
+import Placeholder from "./components/Main/Placeholder/Placeholder";
 import {
   BrowserRouter as Router,
   Route,
-  Outlet,
   Routes,
 } from "react-router-dom";
 import Home from "./components/Main/Home";
@@ -16,7 +15,7 @@ import Resume from "./components/Resume/Resume";
 import Contact from "./components/Contact/Contact";
 
 const App = () => {
-  const [maintenance, setMaintenance] = useState(true);
+  const [maintenance, setMaintenance] = useState(false);
 
   return (
     <Router>
