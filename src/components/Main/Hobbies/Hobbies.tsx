@@ -24,6 +24,11 @@ const Hobbies = () => {
           hobbyLogo={basketballLogo}
           hobbyDescription="I Love Music"
         />
+        <Hobby
+          hobbyName="Competitive Programming"
+          hobbyLogo={basketballLogo}
+          hobbyDescription="I Love Competitive Programming"
+        />
       </div>
     </div>
   );

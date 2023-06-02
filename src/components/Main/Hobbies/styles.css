@@ -7,9 +7,10 @@
   display: flex;
   align-content: space-between;
   padding: 40px;
-  gap: 100px;
+  gap: 70px;
   align-items: center;
   margin-left: 20px;
+  flex-wrap: wrap;
 }
 
 .hobbyContainer {
