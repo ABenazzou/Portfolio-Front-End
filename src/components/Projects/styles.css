@@ -1,0 +1,36 @@
+.projects-sidebar {
+  position: fixed;
+  overflow-y: scroll;
+  display: block;
+  top: 6.4%;
+  bottom: 0;
+  right: 0px;
+}
+
+.Projects {
+  margin-top: 5%;
+  max-width: 75%;
+  margin-bottom: 5%;
+}
+
+.right-navbar-list {
+  display: flex;
+  background-color: #4D4B4B;
+  flex-direction: column;
+  justify-content: space-evenly;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  max-width: 370px;
+}
+
+.right-navbar-item {
+  padding: 15px;
+  text-decoration: none;
+}
+
+.right-navbar-item:hover {
+  cursor: pointer;
+  background-color: #303030;
+  color: #909090;
+}

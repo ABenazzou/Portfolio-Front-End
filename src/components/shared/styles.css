@@ -27,11 +27,11 @@
 }
 
 .cardContainer {
-  width: 25%;
   display: grid;
   justify-items: center;
   grid-gap: 10px;
   color: white;
   border: solid 2px;
   overflow: hidden;
+  width: auto;
 }
