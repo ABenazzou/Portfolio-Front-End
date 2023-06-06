@@ -15,7 +15,7 @@ import Resume from "./components/Resume/Resume";
 import Contact from "./components/Contact/Contact";
 
 const App = () => {
-  const [maintenance, setMaintenance] = useState(true);
+  const [maintenance, setMaintenance] = useState(false);
 
 
   return (

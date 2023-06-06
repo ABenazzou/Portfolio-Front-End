@@ -6,23 +6,23 @@ const Header = () => {
     <div className="header">
       <ul className="navbar-list">
         <li className="navbar-item logo">
-          <Link to="/">Logo Placeholder</Link>
+          <Link className="link-padding" to="/">Logo Placeholder</Link>
         </li>
         <li className="navbar-item">
-          <Link to="/">Benazzou Adnane</Link>
+          <Link className="link-padding" to="/">Benazzou Adnane</Link>
         </li>
         <li className="navbar-item">
-          <Link to="/projects">Projects</Link>
+          <Link className="link-padding" to="/projects">Projects</Link>
         </li>
         <li className="navbar-item">
-          <Link to="/certificates">Certificates</Link>
+          <Link className="link-padding" to="/certificates">Certificates</Link>
         </li>
         <li className="theme-toggle">Theme Placeholder</li>
         <li className="navbar-item">
-          <Link to="/resume">Resume</Link>
+          <Link className="link-padding" to="/resume">Resume</Link>
         </li>
         <li className="navbar-item">
-          <Link to="/contact">Contact</Link>
+          <Link className="link-padding" to="/contact">Contact</Link>
         </li>
       </ul>
     </div>

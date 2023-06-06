@@ -2,3 +2,11 @@
   align-items: space-between;
   margin: 40px;
 }
+
+.projectsSubContainer {
+  display: flex;
+  align-items: space-between;
+  gap: 5rem;
+  margin-left: 7%;
+  flex-wrap: wrap;
+}

@@ -3,3 +3,11 @@
   margin: 40px;
   padding-bottom: 40px;
 }
+
+.certificatesSubContainer {
+  display: flex;
+  align-items: space-between;
+  gap: 5rem;
+  margin-left: 7%;
+  flex-wrap: wrap;
+}
