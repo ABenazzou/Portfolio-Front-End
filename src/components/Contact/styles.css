@@ -1,0 +1,62 @@
+.contactContainer {
+  display: flex;
+  align-content: space-between;
+  margin-top: 7%;
+  margin-left: 5%;
+  gap: 15rem;
+}
+
+.contactFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.formInput {
+  color: white;
+  padding: 20px;
+}
+
+.sendEmailButton {
+  margin-left: 50px;
+}
+
+.contactInput {
+  border-radius: 200px;
+  padding: 20px;
+  background-color: #a1a1a1;
+  margin-bottom: 20px;
+  min-width: 455px;
+  max-width: 455px;
+  max-height: 30px;
+  min-height: 30px;
+}
+
+.textArea {
+  min-width: 750px;
+  border-radius: 50px;
+  min-height: 150px;
+}
+
+::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+.checkboxInput {
+  border-radius: 200px;
+  min-width: 40px;
+  min-height: 30px;
+  appearance: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.checkboxInput:checked {
+    background-color: gray;
+}
+
+.sendText {
+  font-weight: bolder;
+  font-size: larger;
+}

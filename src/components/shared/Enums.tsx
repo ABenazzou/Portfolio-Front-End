@@ -1,6 +1,7 @@
 enum Placement {
     Above,
-    Below
+    Below,
+    Undefined
 }
 
 export default Placement;
