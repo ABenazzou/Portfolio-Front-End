@@ -47,7 +47,7 @@ const Contact = () => {
         />
         <div className="formInput">
           <input type="checkbox" className="checkboxInput" name="sendCopy" />
-          <label className="sendText"> Send me a copied Email</label>
+          <label className="sendText"> Send me a copied email</label>
         </div>
         <div className="sendEmailButton">
           <Button buttonText="Send Email" handleClick={sendEmail} />

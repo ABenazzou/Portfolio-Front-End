@@ -15,10 +15,13 @@
 .formInput {
   color: white;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .sendEmailButton {
-  margin-left: 50px;
+  margin-left: 170px;
 }
 
 .contactInput {
