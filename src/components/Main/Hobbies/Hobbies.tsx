@@ -1,34 +1,29 @@
 import Hobby from "./Hobby";
 import "./styles.css";
 import basketballLogo from "../../../assets/basketball.png";
+import { useEffect, useState } from "react";
 
 const Hobbies = () => {
+  let [hobbies, setHobbies] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("https://portfolio.abenazzou.com/api/hobby")
+      .then((response) => response.json())
+      .then((data) => setHobbies(data));
+  }, []);
   return (
     <div className="hobbiesContainer">
       <h1 className="title">Hobbies</h1>
       <div className="hobbiesSubContainer">
-        <Hobby
-          hobbyName="Basketball"
-          hobbyLogo={basketballLogo}
-          hobbyDescription="I Love Basketball"
-        />
-
-        <Hobby
-          hobbyName="Football"
-          hobbyLogo={basketballLogo}
-          hobbyDescription="I Love Football"
-        />
-
-        <Hobby
-          hobbyName="Music"
-          hobbyLogo={basketballLogo}
-          hobbyDescription="I Love Music"
-        />
-        <Hobby
-          hobbyName="Competitive Programming"
-          hobbyLogo={basketballLogo}
-          hobbyDescription="I Love Competitive Programming"
-        />
+        {hobbies.map((hobby) => {
+          return (
+            <Hobby
+              hobbyName={hobby.name}
+              hobbyLogo={basketballLogo}
+              hobbyDescription={hobby.description}
+            />
+          );
+        })}
       </div>
     </div>
   );

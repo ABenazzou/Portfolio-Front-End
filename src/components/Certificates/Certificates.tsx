@@ -2,56 +2,33 @@ import Card from "../shared/Card";
 import Placement from "../shared/Enums";
 import "./styles.css";
 import certificateLogo from "../../assets/basketball.png";
+import { useEffect, useState } from "react";
 
 const Certificates = () => {
+  let [certificates, setCertificates] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("https://portfolio.abenazzou.com/api/certificate/latest")
+      .then((response) => response.json())
+      .then((data) => setCertificates(data));
+  }, []);
+
   return (
     <div className="certificateContainer">
       <h1 className="title center">5 Certificates</h1>
       <div className="certificateSubContainer">
-        <Card
-          title="certificate 1"
-          thumbnail={certificateLogo}
-          radius={50}
-          titlePlacement={Placement.Undefined}
-          height={300}
-          width={500}
-        />
-
-        <Card
-          title="certificate 2"
-          thumbnail={certificateLogo}
-          radius={50}
-          titlePlacement={Placement.Undefined}
-          height={300}
-          width={500}
-        />
-
-        <Card
-          title="certificate 3"
-          thumbnail={certificateLogo}
-          radius={50}
-          titlePlacement={Placement.Undefined}
-          height={300}
-          width={500}
-        />
-
-        <Card
-          title="certificate 4"
-          thumbnail={certificateLogo}
-          radius={50}
-          titlePlacement={Placement.Undefined}
-          height={300}
-          width={500}
-        />
-
-        <Card
-          title="certificate 5"
-          thumbnail={certificateLogo}
-          radius={50}
-          titlePlacement={Placement.Undefined}
-          height={300}
-          width={500}
-        />
+        {certificates.map((certificate) => {
+          return (
+            <Card
+              title={certificate.name}
+              thumbnail={certificateLogo}
+              radius={50}
+              titlePlacement={Placement.Undefined}
+              height={300}
+              width={500}
+            />
+          );
+        })}
       </div>
     </div>
   );
