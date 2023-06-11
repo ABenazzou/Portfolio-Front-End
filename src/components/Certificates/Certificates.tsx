@@ -20,6 +20,7 @@ const Certificates = () => {
         {certificates.map((certificate) => {
           return (
             <Card
+              key={certificate.id}
               title={certificate.name}
               thumbnail={certificateLogo}
               radius={50}

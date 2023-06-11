@@ -20,6 +20,7 @@ const Technologies = () => {
         {technologies.map((technology) => {
           return (
             <Card
+              key={technology.id}
               title={technology.name}
               thumbnail={reactThumbnail}
               radius={400}

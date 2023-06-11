@@ -20,6 +20,7 @@ const Projects = () => {
         {projects.map((project) => {
           return (
             <Card
+              key={project.id}
               title={project.name}
               thumbnail={projectThumbnail}
               radius={25}

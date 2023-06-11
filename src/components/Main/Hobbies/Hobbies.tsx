@@ -18,6 +18,7 @@ const Hobbies = () => {
         {hobbies.map((hobby) => {
           return (
             <Hobby
+              key={hobby.id}
               hobbyName={hobby.name}
               hobbyLogo={basketballLogo}
               hobbyDescription={hobby.description}

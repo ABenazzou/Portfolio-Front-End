@@ -7,15 +7,33 @@ import { useEffect, useState } from "react";
 
 const Projects = () => {
   let [webDevProjects, setWebDevProjects] = useState<any[]>([]);
-  let [dataScienceProjects, setDataScienceProejcts] = useState<any[]>([]);
-  let [dataEngineeringProejcts, setDataEngineeringProejcts] = useState<any[]>(
+  let [dataScienceProjects, setDataScienceProjects] = useState<any[]>([]);
+  let [dataEngineeringProjects, setDataEngineeringProjects] = useState<any[]>(
     []
   );
 
   useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/domain?name=web deva")
+    fetch("https://portfolio.abenazzou.com/api/domain?name=web development")
       .then((response) => response.json())
-      .then((data) => setWebDevProjects(data.projects));
+      .then((data) => {
+        if (data.projects) setWebDevProjects(data.projects);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("https://portfolio.abenazzou.com/api/domain?name=data science")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.projects) setDataScienceProjects(data.projects);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("https://portfolio.abenazzou.com/api/domain?name=data engineering")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.projects) setDataEngineeringProjects(data.projects);
+      });
   }, []);
 
   return (
@@ -59,6 +77,7 @@ const Projects = () => {
             {webDevProjects.map((project) => {
               return (
                 <Card
+                  key={project.id}
                   title={project.name}
                   thumbnail={projectThumbnail}
                   radius={25}
@@ -73,13 +92,37 @@ const Projects = () => {
         <div className="section-container">
           <h1 className="title">Data Science</h1>
           <div className="projectsSubContainer">
-           
+            {dataScienceProjects.map((project) => {
+              return (
+                <Card
+                  key={project.id}
+                  title={project.name}
+                  thumbnail={projectThumbnail}
+                  radius={25}
+                  titlePlacement={Placement.Above}
+                  height={200}
+                  width={300}
+                />
+              );
+            })}
           </div>
         </div>
         <div className="section-container">
           <h1 className="title">Data Engineering</h1>
           <div className="projectsSubContainer">
-           
+            {dataEngineeringProjects.map((project) => {
+              return (
+                <Card
+                  key={project.id}
+                  title={project.name}
+                  thumbnail={projectThumbnail}
+                  radius={25}
+                  titlePlacement={Placement.Above}
+                  height={200}
+                  width={300}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
