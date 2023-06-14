@@ -3,11 +3,16 @@ import "./Footer.css";
 import { useEffect, useState } from "react";
 const Footer = () => {
   let [socialMedias, setSocialMedias] = useState<any[]>([]);
+  let [copyright, setCopyright] = useState(null);
 
   useEffect(() => {
     fetch("https://portfolio.abenazzou.com/api/section/type/social_media_link")
       .then((response) => response.json())
       .then((data) => setSocialMedias(data));
+
+    fetch("https://portfolio.abenazzou.com/api/section?title=copyright")
+      .then((response) => response.json())
+      .then((data) => setCopyright(data.content));
   }, []);
 
   return (
@@ -21,7 +26,7 @@ const Footer = () => {
           );
         })}
       </ul>
-      <span className="copyright">Copyright Lorem Ipsum</span>
+      <span className="copyright">{copyright}</span>
     </div>
   );
 };
