@@ -4,36 +4,34 @@ import "./styles.css";
 import webDevLogo from "../../assets/basketball.png";
 import Button from "../shared/Button";
 import { useEffect, useState } from "react";
+import { Document, Page, pdfjs } from 'react-pdf';
+import samplePDF from '../../assets/TestResume.pdf';
+import "react-pdf/dist/esm/Page/TextLayer.css";
 
 const downloadResume = () => {
-  console.log("Clicked download resume");
+  fetch(samplePDF)
+  .then( (response) => {
+    response.blob()
+    .then((blob) => {
+      const fileURL = window.URL.createObjectURL(blob);
+      let alink = document.createElement('a');
+      alink.href = fileURL;
+      alink.download = samplePDF;
+      alink.click();
+      alink.parentNode?.removeChild(alink);
+    })
+  })
 };
+
 const Resume = () => {
-  let [webDevResume, setWebDevResume] = useState(null);
-  let [dataScienceResume, setDataScienceResume] = useState(null);
-  let [dataEngineeringResume, setDataEngineeringResume] = useState(null);
+  let [resume, setResume] = useState(null);
+  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   useEffect(() => {
     fetch("https://portfolio.abenazzou.com/api/domain?name=web development")
       .then((response) => response.json())
       .then((data) => {
-        if (data.resume) setWebDevResume(data.resume);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/domain?name=data science")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.resume) setDataScienceResume(data.resume);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/domain?name=data engineering")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.resume) setDataEngineeringResume(data.resume);
+        if (data.resume) setResume(data.resume);
       });
   }, []);
 
@@ -70,8 +68,12 @@ const Resume = () => {
           </li>
         </ul>
       </div>
+
       <div className="resumeContainer">
-        <div className="resumeEmbedding">PLACEHOLDER FOR RESUME EMBEDDING</div>
+          <Document file={samplePDF}>
+            <Page pageNumber={1} renderTextLayer={false} className="resumeEmbedding"/>
+          </Document>
+
         <div className="portfolioButton resumeButton">
           <Button buttonText="Download" handleClick={downloadResume} />
         </div>
