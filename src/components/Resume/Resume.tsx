@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from 'react-pdf';
 import samplePDF from '../../assets/TestResume.pdf';
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import "react-pdf/dist/esm/Page/AnnotationLayer";
 
 const downloadResume = () => {
   fetch(samplePDF)
@@ -25,21 +26,28 @@ const downloadResume = () => {
 
 const Resume = () => {
   let [resume, setResume] = useState(null);
+  let [resumeDomain, setResumeDomain] = useState("web development");
+
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/domain?name=web development")
+    fetch(`https://portfolio.abenazzou.com/api/domain?name=${resumeDomain}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.resume) setResume(data.resume);
       });
-  }, []);
+  }, [resumeDomain]);
+
+  const handleDomainClick = (domain: string) => {
+    if (domain != resumeDomain) setResumeDomain(domain);
+    console.log(domain);
+  }
 
   return (
     <div className="Resumes">
       <div className="resumes-sidebar">
         <ul className="left-navbar-list">
-          <li className="left-navbar-item">
+          <li className="left-navbar-item" onClick={() => handleDomainClick("web development")}>
             <Card
               title="Web Development"
               thumbnail={webDevLogo}
@@ -48,7 +56,7 @@ const Resume = () => {
               height={200}
             />
           </li>
-          <li className="left-navbar-item">
+          <li className="left-navbar-item" onClick={() => handleDomainClick("data science")}>
             <Card
               title="Data Science"
               thumbnail={webDevLogo}
@@ -57,7 +65,7 @@ const Resume = () => {
               height={200}
             />
           </li>
-          <li className="left-navbar-item">
+          <li className="left-navbar-item" onClick={() => handleDomainClick("data engineering")}>
             <Card
               title="Data Engineering"
               thumbnail={webDevLogo}
@@ -71,7 +79,7 @@ const Resume = () => {
 
       <div className="resumeContainer">
           <Document file={samplePDF}>
-            <Page pageNumber={1} renderTextLayer={false} className="resumeEmbedding"/>
+            <Page pageNumber={1} renderTextLayer={false} className="resumeEmbedding" renderAnnotationLayer={false}/>
           </Document>
 
         <div className="portfolioButton resumeButton">
