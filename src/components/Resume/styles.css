@@ -54,3 +54,11 @@
   padding: 15px;
   margin-left: 150px;
 }
+
+.active {
+  background-color: #303030;
+}
+
+.active:hover{
+  cursor: auto;
+}

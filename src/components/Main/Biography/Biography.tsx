@@ -4,7 +4,7 @@ const Biography = () => {
   let [biography, setBiography] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/biography/sorted")
+    fetch("api/biography/sorted")
       .then((response) => response.json())
       .then((data) => setBiography(data));
   }, []);

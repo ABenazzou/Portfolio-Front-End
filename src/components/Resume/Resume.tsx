@@ -5,19 +5,18 @@ import webDevLogo from "../../assets/basketball.png";
 import Button from "../shared/Button";
 import { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from 'react-pdf';
-import samplePDF from '../../assets/TestResume.pdf';
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer";
 
-const downloadResume = () => {
-  fetch(samplePDF)
+const downloadResume = (pdf: string) => {
+  fetch(pdf)
   .then( (response) => {
     response.blob()
     .then((blob) => {
       const fileURL = window.URL.createObjectURL(blob);
       let alink = document.createElement('a');
       alink.href = fileURL;
-      alink.download = samplePDF;
+      alink.download = pdf;
       alink.click();
       alink.parentNode?.removeChild(alink);
     })
@@ -25,29 +24,30 @@ const downloadResume = () => {
 };
 
 const Resume = () => {
-  let [resume, setResume] = useState(null);
+  let [resume, setResume] = useState('');
   let [resumeDomain, setResumeDomain] = useState("web development");
+  const [activeCard, setActiveCard] = useState('');
 
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   useEffect(() => {
-    fetch(`https://portfolio.abenazzou.com/api/domain?name=${resumeDomain}`)
+    fetch(`api/domain?name=${resumeDomain}`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.resume) setResume(data.resume);
+        if (data.resume) setResume(data.resume.pdf);
       });
   }, [resumeDomain]);
 
   const handleDomainClick = (domain: string) => {
     if (domain != resumeDomain) setResumeDomain(domain);
-    console.log(domain);
+    setActiveCard(domain);
   }
 
   return (
     <div className="Resumes">
       <div className="resumes-sidebar">
         <ul className="left-navbar-list">
-          <li className="left-navbar-item" onClick={() => handleDomainClick("web development")}>
+          <li className={`left-navbar-item ${activeCard === 'web development' ? 'active' : ''}`} onClick={() => handleDomainClick("web development")}>
             <Card
               title="Web Development"
               thumbnail={webDevLogo}
@@ -56,7 +56,7 @@ const Resume = () => {
               height={200}
             />
           </li>
-          <li className="left-navbar-item" onClick={() => handleDomainClick("data science")}>
+          <li className={`left-navbar-item ${activeCard === 'data science' ? 'active' : ''}`} onClick={() => handleDomainClick("data science")}>
             <Card
               title="Data Science"
               thumbnail={webDevLogo}
@@ -65,7 +65,7 @@ const Resume = () => {
               height={200}
             />
           </li>
-          <li className="left-navbar-item" onClick={() => handleDomainClick("data engineering")}>
+          <li className={`left-navbar-item ${activeCard === 'data engineering' ? 'active' : ''}`} onClick={() => handleDomainClick("data engineering")}>
             <Card
               title="Data Engineering"
               thumbnail={webDevLogo}
@@ -78,12 +78,12 @@ const Resume = () => {
       </div>
 
       <div className="resumeContainer">
-          <Document file={samplePDF}>
+          <Document file={resume}>
             <Page pageNumber={1} renderTextLayer={false} className="resumeEmbedding" renderAnnotationLayer={false}/>
           </Document>
 
         <div className="portfolioButton resumeButton">
-          <Button buttonText="Download" handleClick={downloadResume} />
+          <Button buttonText="Download" handleClick={() => downloadResume(resume)} />
         </div>
       </div>
     </div>

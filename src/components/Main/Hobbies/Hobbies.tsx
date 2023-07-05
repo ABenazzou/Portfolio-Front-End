@@ -7,7 +7,7 @@ const Hobbies = () => {
   let [hobbies, setHobbies] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/hobby")
+    fetch("api/hobby")
       .then((response) => response.json())
       .then((data) => setHobbies(data));
   }, []);

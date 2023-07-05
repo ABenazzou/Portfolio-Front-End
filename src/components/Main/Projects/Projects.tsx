@@ -8,7 +8,7 @@ const Projects = () => {
   let [projects, setProjects] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/project/mostVisited")
+    fetch("api/project/mostVisited")
       .then((response) => response.json())
       .then((data) => setProjects(data));
   }, []);

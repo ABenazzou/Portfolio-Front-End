@@ -7,7 +7,7 @@ const Certificates = () => {
   let [certificates, setCertificates] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/certificate/latest")
+    fetch("api/certificate/latest")
       .then((response) => response.json())
       .then((data) => setCertificates(data));
   }, []);
