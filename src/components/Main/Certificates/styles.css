@@ -11,3 +11,8 @@
   margin-left: 7%;
   flex-wrap: wrap;
 }
+
+.certificateCard:hover {
+  cursor: pointer;
+  background-color: #303030;
+}
