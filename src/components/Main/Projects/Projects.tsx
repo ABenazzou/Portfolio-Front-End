@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 
 const Projects = () => {
   let [projects, setProjects] = useState<any[]>([]);
+  const handleProjectClick = (link: string) => {
+    window.open(link, '_blank', 'noopener,noreferrer');
+  };
 
   useEffect(() => {
     fetch("api/project/mostVisited")
@@ -19,13 +22,15 @@ const Projects = () => {
       <div className="projectsSubContainer">
         {projects.map((project) => {
           return (
-            <Card
-              key={project.id}
-              title={project.name}
-              thumbnail={projectThumbnail}
-              radius={25}
-              titlePlacement={Placement.Below}
-            />
+            <div className="projectCard" key={project.id} onClick={() => handleProjectClick(project.github_link)}>
+              <Card
+                key={project.id}
+                title={project.name}
+                thumbnail={projectThumbnail}
+                radius={25}
+                titlePlacement={Placement.Below}
+              />
+            </div>
           );
         })}
       </div>

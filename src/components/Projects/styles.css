@@ -35,3 +35,8 @@
   background-color: #303030;
   color: #909090;
 }
+
+.projectCard:hover{
+  background-color: #303030;
+  cursor: pointer;
+}
