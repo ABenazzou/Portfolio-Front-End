@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const Footer = () => {
   let [socialMedias, setSocialMedias] = useState<any[]>([]);
   let [copyright, setCopyright] = useState(null);
-  
+
   const handleClick = (socialMediaLink: string) => {
     window.open(socialMediaLink, '_blank', 'noopener,noreferrer');
   }

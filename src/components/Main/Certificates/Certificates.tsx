@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 const Certificates = () => {
   let [certificates, setCertificates] = useState<any[]>([]);
   const handleCertificateClick = (certificateLink: string) => {
-    console.log(certificateLink);
     window.open(certificateLink, '_blank', 'noopener,noreferrer');
   }
 
