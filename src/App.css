@@ -1,8 +1,12 @@
-:root {
+/* :root {
   background-color: #625C5C;
   max-width: 100%;
 }
 
 a {
   all: unset;
+} */
+
+.App{
+  background-color: #303030;
 }
