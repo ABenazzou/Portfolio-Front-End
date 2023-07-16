@@ -8,7 +8,7 @@ import Projects from "./Projects/Projects";
 import { Container } from "react-bootstrap";
 const Home = () => {
   return (
-    <Container >
+    <Container className="mt-5">
       <Description />
       <Biography />
       <Hobbies />
