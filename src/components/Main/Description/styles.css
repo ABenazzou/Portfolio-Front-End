@@ -1,4 +1,4 @@
-.Avatar {
+/* .Avatar {
   border: solid 10px;
   border-radius: 156.5px;
   min-width: 250px;
@@ -6,26 +6,23 @@
   padding: 60px;
   color: white;
   margin-top: 20px;
-}
+} */
 
-.Container {
+/* .Container {
   display: flex;
   align-items: space-between;
   margin: 40px;
-}
+} */
 
-.subContainer {
+/* .subContainer {
   padding: 20px;
   margin-left: 70px;
   margin-top: 30px;
-}
+} */
 
 .descriptionContent {
-  justify-content: center;
-  font-size: xx-large;
-  color: white;
+  font-size: x-large;
   padding: 20px;
-  padding-bottom: 40px;
   font-family: 'Inter';
   font-weight: bold;
 }
@@ -33,5 +30,4 @@
 .portfolioButton {
   display: flex;
   justify-content: center;
-  margin-right: 170px;
 }

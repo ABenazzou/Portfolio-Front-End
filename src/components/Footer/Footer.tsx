@@ -11,11 +11,11 @@ const Footer = () => {
   }
 
   useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/section/type/social_media_link")
+    fetch("api/section/type/social_media_link")
       .then((response) => response.json())
       .then((data) => setSocialMedias(data));
 
-    fetch("https://portfolio.abenazzou.com/api/section?title=copyright")
+    fetch("api/section?title=copyright")
       .then((response) => response.json())
       .then((data) => setCopyright(data.content));
   }, []);

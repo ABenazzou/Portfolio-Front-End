@@ -7,6 +7,15 @@ a {
   all: unset;
 } */
 
-.App{
+/* .App{
   background-color: #303030;
+} */
+
+h2 {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.pointerHover:hover {
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-.projects-sidebar {
+/* .projects-sidebar {
   position: fixed;
   overflow-y: scroll;
   display: block;
@@ -39,4 +39,11 @@
 .projectCard:hover{
   background-color: #303030;
   cursor: pointer;
+} */
+/* .projects {
+  margin-top: 5%;
+} */
+.secondary-navbar{
+  margin-top: 3.5%;
+  background-color: #212529;
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import "./custom-dark-theme.css";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Placeholder from "./components/Main/Placeholder/Placeholder";
@@ -20,7 +21,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">
+      <div className="custom-bg-dark">
         {!maintenance && <Header />}
         <Routes>
           {maintenance ? (
