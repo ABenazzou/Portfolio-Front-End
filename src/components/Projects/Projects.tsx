@@ -5,7 +5,7 @@ import projectThumbnail from "../../assets/basketball.png";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import { MDBTypography } from "mdb-react-ui-kit";
-import { Container, Row, Col, Card, Button, Nav, Navbar } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Nav, Navbar, Tabs, Tab } from "react-bootstrap";
 import Placement from "../shared/Enums";
 import { Link } from "react-router-dom";
 
@@ -110,68 +110,67 @@ const Projects = () => {
     //     </Row>
     //   </Container>
 
-      
+
 
 
     // </Container>
-    <Container className="text-white mt-5">
-    <Row xs={1} className="mb-3 mt-2">
-      <Col xs={{ offset: 1, span: 7 }}>
-        <MDBTypography tag="h2">Web Development</MDBTypography>
-      </Col>
-    </Row>
-    <Row md={4} xs={2} className="justify-content-md-right offset-1">
-      {webDevProjects.map((project) => {
-        return (
-          <Col key={project.id} className="mb-3">
-            <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
-              <Card.Img src={projectThumbnail} />
-              <Card.Title className="pt-3">{project.name}</Card.Title>
-            </Card>
-          </Col>
-        )
-      })}
+    <Container className="mt-5">
+      <Tabs defaultActiveKey={1}>
+        <Tab eventKey={1} title="Web Development" >
+          <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
+            {webDevProjects.map((project) => {
+              return (
+                <Col key={project.id} className="mb-3">
+                  <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
+                    <Card.Img src={projectThumbnail} />
+                    <Card.Title className="pt-3">{project.name}</Card.Title>
+                  </Card>
+                </Col>
+              )
+            })}
 
-    </Row>
+          </Row>
 
-    <Row xs={1} className="mb-3 mt-2">
-      <Col xs={{ offset: 1, span: 7 }}>
-        <MDBTypography tag="h2">Data Science</MDBTypography>
-      </Col>
-    </Row>
-    <Row md={4} xs={2} className="justify-content-md-right offset-1">
-      {dataScienceProjects.map((project) => {
-        return (
-          <Col key={project.id} className="mb-3">
-            <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
-              <Card.Img src={projectThumbnail} />
-              <Card.Title className="pt-3">{project.name}</Card.Title>
-            </Card>
-          </Col>
-        )
-      })}
+        </Tab>
 
-    </Row>
+        <Tab eventKey={2} title="Data Science">
 
-    <Row xs={1} className="mb-3 mt-2">
-      <Col xs={{ offset: 1, span: 7 }}>
-        <MDBTypography tag="h2">Data Engineering</MDBTypography>
-      </Col>
-    </Row>
-    <Row md={4} xs={2} className="justify-content-md-right offset-1">
-      {dataEngineeringProjects.map((project) => {
-        return (
-          <Col key={project.id} className="mb-3">
-            <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
-              <Card.Img src={projectThumbnail} />
-              <Card.Title className="pt-3">{project.name}</Card.Title>
-            </Card>
-          </Col>
-        )
-      })}
+          <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
+            {dataScienceProjects.map((project) => {
+              return (
+                <Col key={project.id} className="mb-3">
+                  <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
+                    <Card.Img src={projectThumbnail} />
+                    <Card.Title className="pt-3">{project.name}</Card.Title>
+                  </Card>
+                </Col>
+              )
+            })}
 
-    </Row>
-  </Container>
+          </Row>
+        </Tab>
+
+        <Tab eventKey={3} title="Data Engineering">
+          <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
+            {dataEngineeringProjects.map((project) => {
+              return (
+                <Col key={project.id} className="mb-3">
+                  <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
+                    <Card.Img src={projectThumbnail} />
+                    <Card.Title className="pt-3">{project.name}</Card.Title>
+                  </Card>
+                </Col>
+              )
+            })}
+
+          </Row>
+        </Tab>
+
+      </Tabs>
+
+
+
+    </Container>
 
     // {/* <div className="projects-container">
     //     <div className="section-container">
