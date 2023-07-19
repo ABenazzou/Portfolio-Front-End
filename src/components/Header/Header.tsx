@@ -5,26 +5,27 @@ import { useState } from "react";
 
 const Header = () => {
   let [isDarkMode, setIsDarkMode] = useState(true);
+  let [isExpanded, setIsExpanded] = useState(false);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark" className="fixed-top">
+    <Navbar expand="lg" expanded={isExpanded} bg="dark" variant="dark" className="fixed-top">
       <Container >
         <Navbar.Brand as={Link} to="/">Logo Placeholder</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Toggle aria-controls="navbar-nav" onClick={() => setIsExpanded(!isExpanded)}/>
         <Navbar.Collapse id="navbar-nav">
           <Nav className="w-100 justify-content-between ms-3">
             <Nav.Item className="nav-hover">
-              <Nav.Link as={Link} to="/">Benazzou Adnane</Nav.Link>
+              <Nav.Link as={Link} to="/" onClick={() => setIsExpanded(false)}>Benazzou Adnane</Nav.Link>
             </Nav.Item>
             <Nav.Item className="nav-hover">
-              <Nav.Link as={Link} to="/projects">Projects</Nav.Link>
+              <Nav.Link as={Link} to="/projects" onClick={() => setIsExpanded(false)}>Projects</Nav.Link>
             </Nav.Item>
             <Nav.Item className="nav-hover">
-              <Nav.Link as={Link} to="/certificates">Certificates</Nav.Link>
+              <Nav.Link as={Link} to="/certificates" onClick={() => setIsExpanded(false)}>Certificates</Nav.Link>
             </Nav.Item>
 
             <div className="d-flex align-items-center">
@@ -34,10 +35,10 @@ const Header = () => {
             </div>
 
             <Nav.Item className="nav-hover">
-            <Nav.Link as={Link} to="/resume">Resume</Nav.Link>
+            <Nav.Link as={Link} to="/resume" onClick={() => setIsExpanded(false)}>Resume</Nav.Link>
             </Nav.Item>
             <Nav.Item className="nav-hover">
-            <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+            <Nav.Link as={Link} to="/contact" onClick={() => setIsExpanded(false)}>Contact</Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>

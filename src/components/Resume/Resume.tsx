@@ -68,6 +68,8 @@ const Resume = () => {
         .then((data) => {
           setResume(data.resume);// even null should be considered
         });
+
+        setWidth(window.innerWidth);
     }
   }, [resumeDomain]);
 

@@ -1,4 +1,4 @@
-.contactContainer {
+/* .contactContainer {
   display: flex;
   align-content: space-between;
   margin-top: 7%;
@@ -62,4 +62,10 @@
 .sendText {
   font-weight: bolder;
   font-size: larger;
+} */
+
+.large {
+  font-size: large !important;
+  font-family: 'Inter';
+  font-weight: bolder;
 }
