@@ -10,38 +10,79 @@ import Placement from "../shared/Enums";
 import { Link } from "react-router-dom";
 
 const Projects = () => {
-  let [webDevProjects, setWebDevProjects] = useState<any[]>([]);
-  let [dataScienceProjects, setDataScienceProjects] = useState<any[]>([]);
-  let [dataEngineeringProjects, setDataEngineeringProjects] = useState<any[]>(
-    []
-  );
+  // let [webDevProjects, setWebDevProjects] = useState<any[]>([]);
+  // let [dataScienceProjects, setDataScienceProjects] = useState<any[]>([]);
+  // let [dataEngineeringProjects, setDataEngineeringProjects] = useState<any[]>(
+  //   []
+  // );
+
+  let [projects, setProjects] = useState<any[]>([]);
+  let [projectsCategory, setProjectsCategory] = useState('');
+  let [categories, setCategories] = useState<any[]>([]);
+
   const handleProjectClick = (link: string) => {
     window.open(link, '_blank', 'noopener,noreferrer');
   };
 
+  const handleSelect = (key: string | null) => {
+    if (key) setProjectsCategory(categories[parseInt(key) - 1].name);
+    // switch(key) {
+    //   case "1": {
+    //     setProjectsCategory(categories);
+    //     break;
+    //   }
+    //   case "2": {
+    //     setProjectsCategory("data science");
+    //     break;
+    //   }
+    //   case "3": {
+    //     setProjectsCategory("data engineering");
+    //     break;
+    //   }
+    // }
+  }
+
+
+
   useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/domain?name=web development")
+    fetch(`https://portfolio.abenazzou.com/api/domain`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.projects) setWebDevProjects(data.projects);
+        if (data) {
+          setCategories(data);
+          setProjectsCategory(data[0].name); // default
+          // console.log(projectsCategory)
+        }
       });
+    // console.log("in");
   }, []);
 
   useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/domain?name=data science")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.projects) setDataScienceProjects(data.projects);
-      });
-  }, []);
+    if (projectsCategory.length > 0) {
+      fetch(`https://portfolio.abenazzou.com/api/domain?name=${projectsCategory}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.projects) setProjects(data.projects);
+        });
+    }
+  }, [projectsCategory]);
 
-  useEffect(() => {
-    fetch("https://portfolio.abenazzou.com/api/domain?name=data engineering")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.projects) setDataEngineeringProjects(data.projects);
-      });
-  }, []);
+
+  // useEffect(() => {
+  //   fetch("https://portfolio.abenazzou.com/api/domain?name=data science")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.projects) setDataScienceProjects(data.projects);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   fetch("https://portfolio.abenazzou.com/api/domain?name=data engineering")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.projects) setDataEngineeringProjects(data.projects);
+  //     });
+  // }, []);
 
   return (
     // <div className="Projects">
@@ -115,62 +156,83 @@ const Projects = () => {
 
     // </Container>
     <Container className="mt-5">
-      <Tabs defaultActiveKey={1}>
-        <Tab eventKey={1} title="Web Development" >
-          <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
-            {webDevProjects.map((project) => {
-              return (
-                <Col key={project.id} className="mb-3">
-                  <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
-                    <Card.Img src={projectThumbnail} />
-                    <Card.Title className="pt-3">{project.name}</Card.Title>
-                  </Card>
-                </Col>
-              )
-            })}
+      <Tabs defaultActiveKey={1} onSelect={(key) => handleSelect(key)}>
+        {categories.map((category, index) => {
+          return (
+            <Tab key={category.id} eventKey={index + 1} title={category.name} >
+              <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
+                {projects.map((project) => {
+                  return (
+                    <Col key={project.id} className="mb-3">
+                      <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
+                        <Card.Img src={projectThumbnail} />
+                        <Card.Title className="pt-3">{project.name}</Card.Title>
+                      </Card>
+                    </Col>
+                  )
+                })}
 
-          </Row>
+              </Row>
 
-        </Tab>
+            </Tab>
+          )
+        })
+        }
+        {/* <Tab eventKey={1} title="Web Development" >
+        <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
+          {projects.map((project) => {
+            return (
+              <Col key={project.id} className="mb-3">
+                <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
+                  <Card.Img src={projectThumbnail} />
+                  <Card.Title className="pt-3">{project.name}</Card.Title>
+                </Card>
+              </Col>
+            )
+          })}
 
-        <Tab eventKey={2} title="Data Science">
+        </Row>
 
-          <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
-            {dataScienceProjects.map((project) => {
-              return (
-                <Col key={project.id} className="mb-3">
-                  <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
-                    <Card.Img src={projectThumbnail} />
-                    <Card.Title className="pt-3">{project.name}</Card.Title>
-                  </Card>
-                </Col>
-              )
-            })}
+      </Tab>
 
-          </Row>
-        </Tab>
+      <Tab eventKey={2} title="Data Science">
 
-        <Tab eventKey={3} title="Data Engineering">
-          <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
-            {dataEngineeringProjects.map((project) => {
-              return (
-                <Col key={project.id} className="mb-3">
-                  <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
-                    <Card.Img src={projectThumbnail} />
-                    <Card.Title className="pt-3">{project.name}</Card.Title>
-                  </Card>
-                </Col>
-              )
-            })}
+        <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
+          {projects.map((project) => {
+            return (
+              <Col key={project.id} className="mb-3">
+                <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
+                  <Card.Img src={projectThumbnail} />
+                  <Card.Title className="pt-3">{project.name}</Card.Title>
+                </Card>
+              </Col>
+            )
+          })}
 
-          </Row>
-        </Tab>
+        </Row>
+      </Tab>
+
+      <Tab eventKey={3} title="Data Engineering" >
+        <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
+          {projects.map((project) => {
+            return (
+              <Col key={project.id} className="mb-3">
+                <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
+                  <Card.Img src={projectThumbnail} />
+                  <Card.Title className="pt-3">{project.name}</Card.Title>
+                </Card>
+              </Col>
+            )
+          })}
+
+        </Row>
+      </Tab> */}
 
       </Tabs>
 
 
 
-    </Container>
+    </Container >
 
     // {/* <div className="projects-container">
     //     <div className="section-container">
