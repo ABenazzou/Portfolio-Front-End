@@ -45,7 +45,7 @@ const Projects = () => {
 
 
   useEffect(() => {
-    fetch(`https://portfolio.abenazzou.com/api/domain`)
+    fetch(`api/domain`)
       .then((response) => response.json())
       .then((data) => {
         if (data) {
@@ -59,10 +59,10 @@ const Projects = () => {
 
   useEffect(() => {
     if (projectsCategory.length > 0) {
-      fetch(`https://portfolio.abenazzou.com/api/domain?name=${projectsCategory}`)
+      fetch(`api/domain?name=${projectsCategory}`)
         .then((response) => response.json())
         .then((data) => {
-          if (data.projects) setProjects(data.projects);
+          setProjects(data.projects);
         });
     }
   }, [projectsCategory]);
