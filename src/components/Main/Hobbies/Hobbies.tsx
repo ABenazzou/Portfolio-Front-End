@@ -1,5 +1,5 @@
 import "./styles.css";
-import basketballLogo from "../../../assets/basketball.png";
+// import basketballLogo from "../../../assets/basketball.png";
 import { useEffect, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { MDBTypography } from "mdb-react-ui-kit";
@@ -20,13 +20,13 @@ const Hobbies = () => {
           <MDBTypography tag="h2">Hobbies</MDBTypography>
         </Col>
       </Row>
-      <Row md={4} xs={2} className="justify-content-md-right offset-1">
+      <Row md={4} xs={2} className="justify-content-md-right offset-1 ">
         {hobbies.map((hobby) => {
           return (
-            <Col key={hobby.id} className="mb-3">
-              <Card bg='dark' text='white' className="d-flex align-items-center">
-                <Card.Title className="pt-3">{hobby.name}</Card.Title>
-                <Card.Img src={basketballLogo} />
+            <Col key={hobby.id} className="mb-3 d-flex align-items-stretch">
+              <Card bg='dark' text='white' className="d-flex align-items-center justify-content-center">
+                <Card.Title className="pt-3 text-center pb-1">{hobby.name}</Card.Title>
+                <Card.Img src={hobby.logo} height={'250px'}/>
                 <Card.Body className="pb-3">
                   <Card.Text>{hobby.description}</Card.Text>
                 </Card.Body>

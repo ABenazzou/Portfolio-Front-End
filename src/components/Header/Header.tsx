@@ -1,21 +1,33 @@
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import logo from "src/assets/Logo-Light.svg";
+import { BsMoonStarsFill, BsFillSunFill } from "react-icons/bs";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setDarkTheme, setLightTheme } from "../shared/store/features/themeSlice";
 
 const Header = () => {
-  let [isDarkMode, setIsDarkMode] = useState(true);
   let [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+  // const toggleTheme = () => {
+  //   setIsDarkMode(!isDarkMode);
+  // };
+
+
+  let dispatch = useDispatch();
+  let isDarkMode = useSelector((state) => state.theme);
+
+  const switchDarkMode = () => {
+    isDarkMode ? dispatch(setDarkTheme()) : dispatch(setLightTheme());
   };
 
   return (
     <Navbar expand="lg" expanded={isExpanded} bg="dark" variant="dark" className="fixed-top">
       <Container >
-        <Navbar.Brand as={Link} to="/">Logo Placeholder</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" onClick={() => setIsExpanded(!isExpanded)}/>
+        <Navbar.Brand as={Link} to="/" > <img src={logo} className="website-logo" alt="Abenazzou Logo" height="90px" width="auto" /> </Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbar-nav" onClick={() => setIsExpanded(!isExpanded)} />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="w-100 justify-content-between ms-3">
             <Nav.Item className="nav-hover">
@@ -28,17 +40,24 @@ const Header = () => {
               <Nav.Link as={Link} to="/certificates" onClick={() => setIsExpanded(false)}>Certificates</Nav.Link>
             </Nav.Item>
 
-            <div className="d-flex align-items-center">
-              <Button variant={isDarkMode ? 'light' : 'dark'} onClick={toggleTheme}>
+            <div className="d-flex align-items-center" id="darkmode">
+
+              {/* <Button variant={isDarkMode ? 'light' : 'dark'} onClick={toggleTheme}>
                 Theme Placeholder
-              </Button>
+              </Button> */}
+              <input type="checkbox" className="checkbox" id="checkbox" onChange={switchDarkMode} checked={isDarkMode} />
+              <label htmlFor="checkbox" className="label">
+                <BsMoonStarsFill color="white" />
+                <BsFillSunFill color="yellow" />
+                <div className="ball"></div>
+              </label>
             </div>
 
             <Nav.Item className="nav-hover">
-            <Nav.Link as={Link} to="/resume" onClick={() => setIsExpanded(false)}>Resume</Nav.Link>
+              <Nav.Link as={Link} to="/resume" onClick={() => setIsExpanded(false)}>Resume</Nav.Link>
             </Nav.Item>
             <Nav.Item className="nav-hover">
-            <Nav.Link as={Link} to="/contact" onClick={() => setIsExpanded(false)}>Contact</Nav.Link>
+              <Nav.Link as={Link} to="/contact" onClick={() => setIsExpanded(false)}>Contact</Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>

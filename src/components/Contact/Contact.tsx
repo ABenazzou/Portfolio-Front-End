@@ -1,12 +1,12 @@
-import Card from "../shared/Card";
-import Placement from "../shared/Enums";
+// import Card from "../shared/Card";
+// import Placement from "../shared/Enums";
 import "./styles.css";
-import profesionalPicture from "../../assets/basketball.png";
+// import profesionalPicture from "../../assets/basketball.png";
+
 // import Button from "../shared/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Image, Button, Form, FloatingLabel, InputGroup, Alert } from "react-bootstrap";
-
-
+import { Avatar } from '@readyplayerme/visage';
 
 const Contact = () => {
   let [name, setName] = useState('');
@@ -17,6 +17,7 @@ const Contact = () => {
   let [validated, setValidated] = useState(false);
   let [success, setSuccess] = useState(false);
   let [failure, setFailure] = useState(false);
+  let [avatar, setAvatar] = useState('');
 
   const handleSubmit = (event: { currentTarget: any; preventDefault: () => void; stopPropagation: () => void; }) => {
     const form = event.currentTarget;
@@ -63,17 +64,25 @@ const Contact = () => {
     // .then((data) => alert(data));
   };
 
+  useEffect(() => {
+    fetch("api/section?type=image_content&title=Avatar")
+      .then((response) => response.json())
+      .then((data) => setAvatar(data.content))
+  }, [])
+
   return (
     <Container className="mt-5">
       <Row md={3} xs={2}>
         <Col className="d-flex justify-content-left align-items-center" >
-          <Image src={profesionalPicture} className="img-fluid" style={{ maxWidth: 'auto', height: '100%', width: 'auto' }} />
+          <Avatar modelSrc={avatar} />
+          {/* <Image src={profesionalPicture} className="img-fluid" style={{ maxWidth: 'auto', height: '100%', width: 'auto' }} /> */}
+
         </Col>
         <Col className="my-auto" md={{ offset: 1, span: 7 }}>
 
           {
             success && (<Alert key="success" variant="success">
-             <i className="fas fa-thumbs-up"></i>  We have sent your email succesfully!
+              <i className="fas fa-thumbs-up"></i>  We have sent your email succesfully!
             </Alert>)
           }
 

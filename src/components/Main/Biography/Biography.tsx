@@ -18,18 +18,23 @@ const Biography = () => {
           <MDBTypography tag="h2">Biography</MDBTypography>
         </Col>
       </Row>
-      <Row xs={1} className="biography">
-        {biography.map((bio) => {
-          return (
-            <Col className="mb-3" xs={{ offset: 2, span: 6 }} key={bio.id}>
+
+      {biography.map((bio) => {
+        return (
+          <Row xs={1} className="biography" key={bio.id}>
+            <Col xs={{ offset: 2, span: 10 }} className="d-flex gap-3 align-items-center">
               <MDBIcon fas icon="angle-right" />
               {bio.start_year ? bio.start_year + " - " : ""}
-              {bio.end_year ? bio.end_year : "Now"} : {bio.occupation}
+              {bio.end_year ? bio.end_year : "Now"} : {bio.occupation.split(" - ")[0]}
             </Col>
-          );
-        })
-        }
-      </Row>
+            <Col className="mb-3 biography-job" xs={{ offset: 2, span: 7 }}> 
+              {bio.occupation.split(" - ")[1]}
+            </Col>
+          </Row>
+        );
+      })
+      }
+
     </Container>
     // <div className="biographyContainer">
     //   <h1 className="title">Biography</h1>

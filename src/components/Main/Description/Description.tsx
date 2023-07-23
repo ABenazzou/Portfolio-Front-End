@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import Button from "../../shared/Button";
-import Avatar from "./Avatar";
-import Img from "../../../assets/basketball.png";
+// import Img from "../../../assets/basketball.png";
 import "./styles.css";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
+import { Avatar } from '@readyplayerme/visage';
 
 const Description = () => {
   const navigate = useNavigate();
-
   const forwardPortfolio = () => {
     navigate('/projects')
   };
 
-  let [mainDescription, setMainDescription] = useState(null);
-  let [secondaryDescription, setSecondaryDescription] = useState(null);
+  let [mainDescription, setMainDescription] = useState('');
+  let [secondaryDescription, setSecondaryDescription] = useState('');
+  let [avatar, setAvatar] = useState('');
 
   useEffect(() => {
     fetch("api/section?title=Main Description")
@@ -27,13 +27,18 @@ const Description = () => {
     )
       .then((response) => response.json())
       .then((data) => setSecondaryDescription(data.content));
+
+    fetch("api/section?type=image_content&title=Avatar")
+    .then((response) => response.json())
+    .then((data) => setAvatar(data.content))
   }, []);
 
   return (
     <Container className="text-white mt-5" >
       <Row md={2} xs={1}>
-        <Col className="d-flex justify-content-center align-items-center" >
-          <Image src={Img} roundedCircle className="img-fluid" style={{maxWidth: '100%', height: 'auto', width: 'auto'}} />
+        <Col className="d-flex justify-content-center" >
+        <Avatar modelSrc={avatar} />
+          {/* <Image src={Img} roundedCircle className="img-fluid" style={{maxWidth: '100%', height: 'auto', width: 'auto'}} /> */}
         </Col>
         <Col className="my-auto">
           <Container className="d-flex justify-content-center align-items-center descriptionContent">
