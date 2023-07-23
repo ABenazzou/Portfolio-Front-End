@@ -1,4 +1,4 @@
-.button {
+/* .button {
   background-color: #928484;
   border: none;
   border-radius: 150px;
@@ -9,16 +9,16 @@
   text-decoration: none;
   font-size: 16px;
   min-width: 200px;
-}
+} */
 
-.button:hover {
+/* .button:hover {
   background-color: grey;
   cursor: pointer;
-}
+} */
 
-.title {
+/* .title {
   font-size: xx-large;
-  color: white;
+  color: var(--foreground-color);
   padding: 20px;
   font-size: 48px;
   font-family: "Inter";
@@ -30,8 +30,8 @@
   display: grid;
   justify-items: center;
   grid-gap: 10px;
-  color: white;
+  color: var(--foreground-color);
   border: solid 2px;
   overflow: hidden;
   width: auto;
-}
+} */

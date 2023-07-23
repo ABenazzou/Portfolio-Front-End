@@ -2,9 +2,12 @@ import "./Footer.css";
 import { useEffect, useState } from "react";
 import { MDBBtn, MDBContainer, MDBFooter, MDBIcon } from "mdb-react-ui-kit";
 import { Col, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { State } from "../../store/reducers";
 const Footer = () => {
   let [socialMedias, setSocialMedias] = useState<any[]>([]);
   let [copyright, setCopyright] = useState(null);
+  let isDarkMode = useSelector((state: State) => state.theme);
 
   const handleClick = (socialMediaLink: string) => {
     window.open(socialMediaLink, '_blank', 'noopener,noreferrer');
@@ -21,14 +24,14 @@ const Footer = () => {
   }, []);
 
   return (
-    <MDBFooter className="bg-dark text-white fixed-bottom">
+    <MDBFooter className={isDarkMode?"bg-dark text-white fixed-bottom":"bg-light fixed-bottom"}>
       <MDBContainer className='p-0 m-1' fluid>
 
         <Row>
           <Col md={4}>
             {socialMedias.map((socialMedia) => {
               return (
-                <MDBBtn key={socialMedia.id} outline color="light" floating className='m-1 fixedButton' onClickCapture={() => handleClick(socialMedia.content)}>
+                <MDBBtn key={socialMedia.id} outline color={isDarkMode?"light":"dark"} floating className='m-1 fixedButton' onClickCapture={() => handleClick(socialMedia.content)}>
                   <MDBIcon fab icon={socialMedia.title} />
                 </MDBBtn>
               );

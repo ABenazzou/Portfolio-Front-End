@@ -6,6 +6,8 @@ import "./styles.css";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { Avatar } from '@readyplayerme/visage';
+import { useSelector } from "react-redux";
+import { State } from "../../../store/reducers";
 
 const Description = () => {
   const navigate = useNavigate();
@@ -16,6 +18,8 @@ const Description = () => {
   let [mainDescription, setMainDescription] = useState('');
   let [secondaryDescription, setSecondaryDescription] = useState('');
   let [avatar, setAvatar] = useState('');
+  let isDarkMode = useSelector((state: State) => state.theme);
+
 
   useEffect(() => {
     fetch("api/section?title=Main Description")
@@ -34,7 +38,7 @@ const Description = () => {
   }, []);
 
   return (
-    <Container className="text-white mt-5" >
+    <Container className={isDarkMode?"text-white mt-5":"mt-5"} >
       <Row md={2} xs={1}>
         <Col className="d-flex justify-content-center" >
         <Avatar modelSrc={avatar} />
@@ -48,7 +52,7 @@ const Description = () => {
             {secondaryDescription}
           </Container>
           <Container className="d-flex justify-content-center align-items-center">
-            <Button variant="secondary" className="portfolioButton" onClick={forwardPortfolio}>My Portfolio</Button>
+            <Button variant={isDarkMode?"secondary":"dark"} className="portfolioButton" onClick={forwardPortfolio}>My Portfolio</Button>
           </Container>
         </Col>
       </Row>

@@ -5,9 +5,13 @@ import certificateLogo from "../../assets/basketball.png";
 import { useEffect, useState } from "react";
 import { MDBTypography } from "mdb-react-ui-kit";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { State } from "../../store/reducers";
 
 const Certificates = () => {
   let [certificates, setCertificates] = useState<any[]>([]);
+  let isDarkMode = useSelector((state: State) => state.theme);
+
   const handleCertificateClick = (certificateLink: string) => {
     console.log(certificateLink);
     window.open(certificateLink, '_blank', 'noopener,noreferrer');
@@ -21,7 +25,7 @@ const Certificates = () => {
   }, []);
 
   return (
-    <Container className="text-white mt-5">
+    <Container className={isDarkMode?"text-white mt-5":"mt-5"}>
       <Row xs={1} className="mb-3 mt-2">
         <Col className="mb-3">
           <MDBTypography tag="h2" className="d-flex justify-content-center">{certificates.length} Certificates</MDBTypography>
@@ -31,7 +35,7 @@ const Certificates = () => {
         {certificates.map((certificate) => {
           return (
             <Col key={certificate.id} className="mb-3">
-              <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleCertificateClick(certificate.validity_link)}>
+              <Card bg={isDarkMode?'dark':'light'} text={isDarkMode?'white':'dark'} className="d-flex align-items-center pointerHover" onClick={() => handleCertificateClick(certificate.validity_link)}>
                 <Card.Img src={certificateLogo} />
                 <Card.Title className="pt-3">{certificate.name}</Card.Title>
               </Card>

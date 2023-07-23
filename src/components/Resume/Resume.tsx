@@ -1,13 +1,15 @@
 // import Card from "../shared/Card";
-import Placement from "../shared/Enums";
+// import Placement from "../shared/Enums";
 import "./styles.css";
-import webDevLogo from "../../assets/basketball.png";
-import Button from "../shared/Button";
+// import webDevLogo from "../../assets/basketball.png";
+// import Button from "../shared/Button";
 import { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from 'react-pdf';
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer";
-import { Container, Tabs, Tab, Row, Col, Card } from "react-bootstrap";
+import { Container, Tabs, Tab, Row, Col, Card, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { State } from "../../store/reducers";
 
 const Resume = () => {
   let [resume, setResume] = useState<any>(null);
@@ -15,6 +17,7 @@ const Resume = () => {
   // const [activeCard, setActiveCard] = useState('');
   let [categories, setCategories] = useState<any[]>([]);
   let [width, setWidth] = useState<number>(0);
+  let isDarkMode = useSelector((state: State) => state.theme);
 
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -133,7 +136,7 @@ const Resume = () => {
             {resume &&
               <Row >
                 <Col xs={{offset: 3, span: 1}} md={{offset: 5, span: 1}} className="mb-3">
-                  <Button buttonText="Download" handleClick={() => downloadResume(resume.pdf)} />
+                  <Button variant={isDarkMode?'secondary':'dark'} className="portfolioButton" onClick={() => downloadResume(resume.pdf)}>Download</Button>
                 </Col>
               </Row>
             }

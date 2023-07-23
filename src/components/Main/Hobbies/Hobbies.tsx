@@ -3,9 +3,13 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { MDBTypography } from "mdb-react-ui-kit";
+import { useSelector } from "react-redux";
+import { State } from "../../../store/reducers";
+
 
 const Hobbies = () => {
   let [hobbies, setHobbies] = useState<any[]>([]);
+  let isDarkMode = useSelector((state: State) => state.theme);
 
   useEffect(() => {
     fetch("api/hobby")
@@ -14,7 +18,7 @@ const Hobbies = () => {
   }, []);
 
   return (
-    <Container  className="text-white">
+    <Container  className={isDarkMode?"text-white":""}>
       <Row xs={1} className="mb-3 mt-2">
         <Col xs={{ offset: 1, span: 7 }}>
           <MDBTypography tag="h2">Hobbies</MDBTypography>
@@ -24,7 +28,7 @@ const Hobbies = () => {
         {hobbies.map((hobby) => {
           return (
             <Col key={hobby.id} className="mb-3 d-flex align-items-stretch">
-              <Card bg='dark' text='white' className="d-flex align-items-center justify-content-center">
+              <Card bg={isDarkMode?'dark':'light'} text={isDarkMode?'white':'dark'} className="d-flex align-items-center justify-content-center">
                 <Card.Title className="pt-3 text-center pb-1">{hobby.name}</Card.Title>
                 <Card.Img src={hobby.logo} height={'250px'}/>
                 <Card.Body className="pb-3">

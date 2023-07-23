@@ -5,9 +5,12 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { MDBTypography } from "mdb-react-ui-kit";
+import { useSelector } from "react-redux";
+import { State } from "../../../store/reducers";
 
 const Technologies = () => {
   let [technologies, setTechnologies] = useState<any[]>([]);
+  let isDarkMode = useSelector((state: State) => state.theme);
 
   useEffect(() => {
     fetch("https://portfolio.abenazzou.com/api/technology")
@@ -16,7 +19,7 @@ const Technologies = () => {
   }, []);
 
   return (
-    <Container  className="text-white">
+    <Container  className={isDarkMode?"text-white":""}>
     <Row xs={1} className="mb-3 mt-2">
       <Col xs={{ offset: 1, span: 7 }}>
         <MDBTypography tag="h2">Favorite Technologies</MDBTypography>
@@ -26,7 +29,7 @@ const Technologies = () => {
       {technologies.map((technology) => {
         return (
           <Col key={technology.id} className="mb-3 d-flex align-items-stretch">
-            <Card bg='dark' text='white' className="d-flex align-items-center">
+            <Card bg={isDarkMode?'dark':'light'} text={isDarkMode?'white':'dark'} className="d-flex align-items-center">
               <Card.Img src={technology.logo} />
               <Card.Title className="pt-3 text-center">{technology.name}</Card.Title>
             </Card>

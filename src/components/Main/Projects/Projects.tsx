@@ -5,9 +5,13 @@ import projectThumbnail from "../../../assets/basketball.png";
 import { useEffect, useState } from "react";
 import { MDBTypography } from "mdb-react-ui-kit";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { State } from "../../../store/reducers";
 
 const Projects = () => {
   let [projects, setProjects] = useState<any[]>([]);
+  let isDarkMode = useSelector((state: State) => state.theme);
+
   const handleProjectClick = (link: string) => {
     window.open(link, '_blank', 'noopener,noreferrer');
   };
@@ -19,7 +23,7 @@ const Projects = () => {
   }, []);
 
   return (
-    <Container  className="text-white">
+    <Container  className={isDarkMode?"text-white":""}>
     <Row xs={1} className="mb-3 mt-2">
       <Col xs={{ offset: 1, span: 7 }}>
         <MDBTypography tag="h2">Popular Projects</MDBTypography>
@@ -29,7 +33,7 @@ const Projects = () => {
       {projects.map((project) => {
         return (
           <Col key={project.id} className="mb-3">
-            <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
+            <Card bg={isDarkMode?'dark':'light'} text={isDarkMode?'white':'dark'} className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
               <Card.Img src={projectThumbnail} />
               <Card.Title className="pt-3">{project.name}</Card.Title>
             </Card>

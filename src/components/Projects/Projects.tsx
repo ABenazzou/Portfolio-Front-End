@@ -1,13 +1,15 @@
 // import Card from "../shared/Card";
 // import Placement from "../shared/Enums";
-import webDevLogo from "../../assets/basketball.png";
+// import webDevLogo from "../../assets/basketball.png";
 import projectThumbnail from "../../assets/basketball.png";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import { MDBTypography } from "mdb-react-ui-kit";
 import { Container, Row, Col, Card, Button, Nav, Navbar, Tabs, Tab } from "react-bootstrap";
-import Placement from "../shared/Enums";
-import { Link } from "react-router-dom";
+// import Placement from "../shared/Enums";
+// import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { State } from "../../store/reducers";
 
 const Projects = () => {
   // let [webDevProjects, setWebDevProjects] = useState<any[]>([]);
@@ -19,6 +21,8 @@ const Projects = () => {
   let [projects, setProjects] = useState<any[]>([]);
   let [projectsCategory, setProjectsCategory] = useState('');
   let [categories, setCategories] = useState<any[]>([]);
+  let isDarkMode = useSelector((state: State) => state.theme);
+  
 
   const handleProjectClick = (link: string) => {
     window.open(link, '_blank', 'noopener,noreferrer');
@@ -164,7 +168,7 @@ const Projects = () => {
                 {projects.map((project) => {
                   return (
                     <Col key={project.id} className="mb-3">
-                      <Card bg='dark' text='white' className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
+                      <Card bg={isDarkMode?'dark':'light'} text={isDarkMode?'white':'dark'} className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
                         <Card.Img src={projectThumbnail} />
                         <Card.Title className="pt-3">{project.name}</Card.Title>
                       </Card>

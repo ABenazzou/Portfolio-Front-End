@@ -48,6 +48,9 @@
 img.website-logo {
   width: auto;
   height: 40px;
+}
+
+img.dark {
   filter: invert(76%) sepia(0%) saturate(1022%) hue-rotate(248deg) brightness(84%) contrast(81%);
 }
 

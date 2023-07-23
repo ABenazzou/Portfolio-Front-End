@@ -6,7 +6,9 @@ import logo from "src/assets/Logo-Light.svg";
 import { BsMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setDarkTheme, setLightTheme } from "../shared/store/features/themeSlice";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../store";
+import { State } from "../../store/reducers";
 
 const Header = () => {
   let [isExpanded, setIsExpanded] = useState(false);
@@ -17,16 +19,19 @@ const Header = () => {
 
 
   let dispatch = useDispatch();
-  let isDarkMode = useSelector((state) => state.theme);
+
+  const { setTheme } = bindActionCreators(actionCreators, dispatch);
+
+  let isDarkMode = useSelector((state: State) => state.theme);
 
   const switchDarkMode = () => {
-    isDarkMode ? dispatch(setDarkTheme()) : dispatch(setLightTheme());
+    setTheme(!isDarkMode)
   };
 
   return (
-    <Navbar expand="lg" expanded={isExpanded} bg="dark" variant="dark" className="fixed-top">
+    <Navbar expand="lg" expanded={isExpanded} bg={isDarkMode?"dark":"light"} variant={isDarkMode?"dark":"light"} className="fixed-top">
       <Container >
-        <Navbar.Brand as={Link} to="/" > <img src={logo} className="website-logo" alt="Abenazzou Logo" height="90px" width="auto" /> </Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" > <img src={logo} className={isDarkMode?"website-logo dark": "website-logo"} alt="Abenazzou Logo" height="90px" width="auto" /> </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" onClick={() => setIsExpanded(!isExpanded)} />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="w-100 justify-content-between ms-3">
@@ -45,7 +50,7 @@ const Header = () => {
               {/* <Button variant={isDarkMode ? 'light' : 'dark'} onClick={toggleTheme}>
                 Theme Placeholder
               </Button> */}
-              <input type="checkbox" className="checkbox" id="checkbox" onChange={switchDarkMode} checked={isDarkMode} />
+              <input type="checkbox" className="checkbox" id="checkbox" onChange={switchDarkMode} checked={!isDarkMode} />
               <label htmlFor="checkbox" className="label">
                 <BsMoonStarsFill color="white" />
                 <BsFillSunFill color="yellow" />

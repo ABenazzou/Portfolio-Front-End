@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import "./styles.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { MDBIcon, MDBTypography } from "mdb-react-ui-kit";
+import { useSelector } from "react-redux";
+import { State } from "../../../store/reducers";
 const Biography = () => {
   let [biography, setBiography] = useState<any[]>([]);
+  let isDarkMode = useSelector((state: State) => state.theme);
+  
+
 
   useEffect(() => {
     fetch("api/biography/sorted")
@@ -12,7 +17,7 @@ const Biography = () => {
   }, []);
 
   return (
-    <Container className="text-white" >
+    <Container className={isDarkMode?"text-white":""} >
       <Row xs={1} className="mb-3 mt-2">
         <Col xs={{ offset: 1, span: 7 }}>
           <MDBTypography tag="h2">Biography</MDBTypography>

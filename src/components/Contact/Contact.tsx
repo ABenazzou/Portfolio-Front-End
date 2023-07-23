@@ -7,6 +7,8 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Image, Button, Form, FloatingLabel, InputGroup, Alert } from "react-bootstrap";
 import { Avatar } from '@readyplayerme/visage';
+import { useSelector } from "react-redux";
+import { State } from "../../store/reducers";
 
 const Contact = () => {
   let [name, setName] = useState('');
@@ -18,6 +20,7 @@ const Contact = () => {
   let [success, setSuccess] = useState(false);
   let [failure, setFailure] = useState(false);
   let [avatar, setAvatar] = useState('');
+  let isDarkMode = useSelector((state: State) => state.theme);
 
   const handleSubmit = (event: { currentTarget: any; preventDefault: () => void; stopPropagation: () => void; }) => {
     const form = event.currentTarget;
@@ -120,11 +123,11 @@ const Contact = () => {
 
             <Form.Group className="d-flex justify-content-right align-items-center gap-2 mb-3">
               <Form.Check type="checkbox" onChange={(event) => setIsCopy(event.target.checked)} />
-              <Form.Text className="text-white large">Send me a copied email</Form.Text>
+              <Form.Text className={isDarkMode?"text-white large":"large"}>Send me a copied email</Form.Text>
             </Form.Group>
 
             <Container className="d-flex justify-content-center align-items-center ">
-              <Button variant="secondary" type="submit">Send Email</Button>
+              <Button variant={isDarkMode?"secondary":"dark"} type="submit">Send Email</Button>
             </Container>
           </Form>
 
