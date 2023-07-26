@@ -1,7 +1,7 @@
 import "./styles.css";
 // import basketballLogo from "../../../assets/basketball.png";
 import { useEffect, useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import { MDBTypography } from "mdb-react-ui-kit";
 import { useSelector } from "react-redux";
 import { State } from "../../../store/reducers";
@@ -10,35 +10,42 @@ import { State } from "../../../store/reducers";
 const Hobbies = () => {
   let [hobbies, setHobbies] = useState<any[]>([]);
   let isDarkMode = useSelector((state: State) => state.theme);
+  let [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("api/hobby")
       .then((response) => response.json())
-      .then((data) => setHobbies(data));
+      .then((data) => setHobbies(data))
+      .then(() => setIsLoading(false));
   }, []);
 
   return (
-    <Container  className={isDarkMode?"text-white":""}>
+    <Container className={isDarkMode ? "text-white" : ""}>
       <Row xs={1} className="mb-3 mt-2">
         <Col xs={{ offset: 1, span: 7 }}>
           <MDBTypography tag="h2">Hobbies</MDBTypography>
         </Col>
       </Row>
       <Row md={4} xs={2} className="justify-content-md-right offset-1 ">
+        {isLoading &&
+          <div className='d-flex justify-content-center'>
+            <Spinner animation="border" variant={isDarkMode ? "secondary" : "dark"} className="d-flex justify-content-center" />
+          </div>
+        }
         {hobbies.map((hobby) => {
           return (
             <Col key={hobby.id} className="mb-3 d-flex align-items-stretch">
-              <Card bg={isDarkMode?'dark':'light'} text={isDarkMode?'white':'dark'} className="d-flex align-items-center justify-content-center">
+              <Card bg={isDarkMode ? 'dark' : 'light'} text={isDarkMode ? 'white' : 'dark'} className="d-flex align-items-center justify-content-center">
                 <Card.Title className="pt-3 text-center pb-1">{hobby.name}</Card.Title>
-                <Card.Img src={hobby.logo} height={'250px'}/>
+                <Card.Img src={hobby.logo} height={'250px'} />
                 <Card.Body className="pb-3">
                   <Card.Text>{hobby.description}</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           )
-        })} 
-                 
+        })}
+
       </Row>
 
     </Container>

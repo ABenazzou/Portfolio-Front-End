@@ -53,6 +53,6 @@
 }
 
 .nav.nav-tabs .nav-link.active{
-  background-color: var(--active-background-color);
-  color: var(--background-color);
+  background-color: var(--secondary-hover-background-color) !important;
+  color: var(--active-background-color) !important;
 }

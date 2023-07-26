@@ -16,7 +16,7 @@
 }
 
 .pointerHover:Hover {
-  background-color: #696969 !important;
+  background-color: var(--secondary-hover-background-color) !important;
 }
 
 

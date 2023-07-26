@@ -1,11 +1,11 @@
 // import Card from "../shared/Card";
 // import Placement from "../shared/Enums";
 // import webDevLogo from "../../assets/basketball.png";
-import projectThumbnail from "../../assets/basketball.png";
+// import projectThumbnail from "../../assets/basketball.png";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import { MDBTypography } from "mdb-react-ui-kit";
-import { Container, Row, Col, Card, Button, Nav, Navbar, Tabs, Tab } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Nav, Navbar, Tabs, Tab, Spinner } from "react-bootstrap";
 // import Placement from "../shared/Enums";
 // import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -22,7 +22,8 @@ const Projects = () => {
   let [projectsCategory, setProjectsCategory] = useState('');
   let [categories, setCategories] = useState<any[]>([]);
   let isDarkMode = useSelector((state: State) => state.theme);
-  
+  let [isLoading, setIsLoading] = useState(true);
+  let [isLoadingTab, setIsLoadingTab] = useState(true);
 
   const handleProjectClick = (link: string) => {
     window.open(link, '_blank', 'noopener,noreferrer');
@@ -57,17 +58,20 @@ const Projects = () => {
           setProjectsCategory(data[0].name); // default
           // console.log(projectsCategory)
         }
-      });
+      })
+      .then(() => setIsLoading(false));
     // console.log("in");
   }, []);
 
   useEffect(() => {
     if (projectsCategory.length > 0) {
+      setIsLoadingTab(true);
       fetch(`api/domain?name=${projectsCategory}`)
         .then((response) => response.json())
         .then((data) => {
           setProjects(data.projects);
-        });
+        })
+        .then(() => setIsLoadingTab(false));
     }
   }, [projectsCategory]);
 
@@ -155,22 +159,30 @@ const Projects = () => {
     //     </Row>
     //   </Container>
 
-
-
-
     // </Container>
     <Container className="mt-5">
+      {isLoading &&
+        <div className='d-flex justify-content-center'>
+          <Spinner animation="border" variant={isDarkMode ? "secondary" : "dark"} className="d-flex justify-content-center" />
+        </div>
+      }
+
       <Tabs defaultActiveKey={1} onSelect={(key) => handleSelect(key)}>
         {categories.map((category, index) => {
           return (
             <Tab key={category.id} eventKey={index + 1} title={category.name} >
               <Row md={4} xs={2} className="justify-content-md-right offset-1 mt-4">
+                {isLoadingTab &&
+                  <div className='d-flex justify-content-center'>
+                    <Spinner animation="border" variant={isDarkMode ? "secondary" : "dark"} className="d-flex justify-content-center" />
+                  </div>
+                }
                 {projects.map((project) => {
                   return (
-                    <Col key={project.id} className="mb-3">
-                      <Card bg={isDarkMode?'dark':'light'} text={isDarkMode?'white':'dark'} className="d-flex align-items-center pointerHover" onClick={() => handleProjectClick(project.github_link)}>
-                        <Card.Img src={projectThumbnail} />
-                        <Card.Title className="pt-3">{project.name}</Card.Title>
+                    <Col key={project.id} className="mb-3 align-items-stretch">
+                      <Card bg={isDarkMode ? 'dark' : 'light'} text={isDarkMode ? 'white' : 'dark'} className="d-flex align-items-center pointerHover justify-content-center" onClick={() => handleProjectClick(project.github_link)}>
+                        <Card.Img src={project.thumbail} />
+                        <Card.Title className="pt-3 text-center pb-1">{project.name}</Card.Title>
                       </Card>
                     </Col>
                   )

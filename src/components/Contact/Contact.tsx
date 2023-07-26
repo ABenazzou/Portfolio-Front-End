@@ -5,7 +5,7 @@ import "./styles.css";
 
 // import Button from "../shared/Button";
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Image, Button, Form, FloatingLabel, InputGroup, Alert } from "react-bootstrap";
+import { Container, Row, Col, Image, Button, Form, FloatingLabel, InputGroup, Alert, Spinner } from "react-bootstrap";
 import { Avatar } from '@readyplayerme/visage';
 import { useSelector } from "react-redux";
 import { State } from "../../store/reducers";
@@ -21,8 +21,11 @@ const Contact = () => {
   let [failure, setFailure] = useState(false);
   let [avatar, setAvatar] = useState('');
   let isDarkMode = useSelector((state: State) => state.theme);
+  let [isLoading, setIsLoading] = useState(true);
+  let [isSendingEmail, setIsSendingEmail] = useState(false);
 
   const handleSubmit = (event: { currentTarget: any; preventDefault: () => void; stopPropagation: () => void; }) => {
+    setIsSendingEmail(true);
     const form = event.currentTarget;
     setSuccess(false);
     setFailure(false);
@@ -30,6 +33,7 @@ const Contact = () => {
     event.preventDefault();
     if (form.checkValidity() === false) {
       event.stopPropagation();
+      setTimeout(() => setIsSendingEmail(false), 1000);
     }
     else {
       sendEmail();
@@ -63,7 +67,8 @@ const Contact = () => {
     }
 
     fetch("api/mail", options)
-      .then((response) => { response.status == 201 ? setEmailState(true) : setEmailState(false) });
+      .then((response) => { response.status == 201 ? setEmailState(true) : setEmailState(false) })
+      .then(() => setIsSendingEmail(false));
     // .then((data) => alert(data));
   };
 
@@ -71,12 +76,18 @@ const Contact = () => {
     fetch("api/section?type=image_content&title=Avatar")
       .then((response) => response.json())
       .then((data) => setAvatar(data.content))
+      .then(() => setIsLoading(false));
   }, [])
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 ">
       <Row md={3} xs={2}>
         <Col className="d-flex justify-content-left align-items-center" >
+          {isLoading &&
+            <div className='d-flex justify-content-center'>
+              <Spinner animation="border" variant={isDarkMode ? "secondary" : "dark"} className="d-flex justify-content-center" />
+            </div>
+          }
           <Avatar modelSrc={avatar} />
           {/* <Image src={profesionalPicture} className="img-fluid" style={{ maxWidth: 'auto', height: '100%', width: 'auto' }} /> */}
 
@@ -123,11 +134,12 @@ const Contact = () => {
 
             <Form.Group className="d-flex justify-content-right align-items-center gap-2 mb-3">
               <Form.Check type="checkbox" onChange={(event) => setIsCopy(event.target.checked)} />
-              <Form.Text className={isDarkMode?"text-white large":"large"}>Send me a copied email</Form.Text>
+              <Form.Text className={isDarkMode ? "text-white large" : "large"}>Send me a copied email</Form.Text>
             </Form.Group>
 
             <Container className="d-flex justify-content-center align-items-center ">
-              <Button variant={isDarkMode?"secondary":"dark"} type="submit">Send Email</Button>
+              <Button variant={isDarkMode ? "secondary" : "dark"} type="submit">{isSendingEmail ? <div className='d-flex justify-content-center mt-4'><Spinner size="sm" animation="border" variant={isDarkMode ? "dark" : "secondary"} />
+              </div> : "Send Email"}</Button>
             </Container>
           </Form>
 
@@ -135,7 +147,7 @@ const Contact = () => {
 
         </Col>
       </Row>
-    </Container>
+    </Container >
     // <div className="contactContainer">
     //   <div className="professionalPicture">
     //     <Card

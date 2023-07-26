@@ -41,8 +41,7 @@
 } */
 
 .nav-hover:hover{
-  background-color: #303030;
-  color: #909090;
+  background-color: var(--hover-background-color);
 }
 
 img.website-logo {
@@ -94,4 +93,8 @@ img.dark {
 
 #darkmode .checkbox:checked + .label .ball{
   transform: translateX(24px);
+}
+
+.active{
+  background-color: var(--hover-background-color) !important;
 }

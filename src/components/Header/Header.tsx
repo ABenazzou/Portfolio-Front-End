@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import logo from "src/assets/Logo-Light.svg";
 import { BsMoonStarsFill, BsFillSunFill } from "react-icons/bs";
@@ -12,6 +12,8 @@ import { State } from "../../store/reducers";
 
 const Header = () => {
   let [isExpanded, setIsExpanded] = useState(false);
+  let location = useLocation();
+  const [url, setUrl] = useState('');
 
   // const toggleTheme = () => {
   //   setIsDarkMode(!isDarkMode);
@@ -28,21 +30,26 @@ const Header = () => {
     setTheme(!isDarkMode)
   };
 
+  useEffect(() => {
+    setUrl(location.pathname);
+  }, [location]);
+
   return (
-    <Navbar expand="lg" expanded={isExpanded} bg={isDarkMode?"dark":"light"} variant={isDarkMode?"dark":"light"} className="fixed-top">
+    <Navbar expand="lg" expanded={isExpanded} bg={isDarkMode ? "dark" : "light"} variant={isDarkMode ? "dark" : "light"} className="fixed-top">
       <Container >
-        <Navbar.Brand as={Link} to="/" > <img src={logo} className={isDarkMode?"website-logo dark": "website-logo"} alt="Abenazzou Logo" height="90px" width="auto" /> </Navbar.Brand>
+        <Navbar.Brand as={Link} to="/"> <img src={logo} className={isDarkMode ? "website-logo dark" : "website-logo"} alt="Abenazzou Logo" height="90px" width="auto" /> </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" onClick={() => setIsExpanded(!isExpanded)} />
+
         <Navbar.Collapse id="navbar-nav">
-          <Nav className="w-100 justify-content-between ms-3">
-            <Nav.Item className="nav-hover">
-              <Nav.Link as={Link} to="/" onClick={() => setIsExpanded(false)}>Benazzou Adnane</Nav.Link>
+          <Nav className="w-100 justify-content-between ms-3" as="ul">
+            <Nav.Item className="nav-hover" as="li">
+              <Nav.Link as={Link} to="/" className={url === "/" ? "active disabled" : ""} onClick={() => setIsExpanded(false)}>Benazzou Adnane</Nav.Link>
             </Nav.Item>
-            <Nav.Item className="nav-hover">
-              <Nav.Link as={Link} to="/projects" onClick={() => setIsExpanded(false)}>Projects</Nav.Link>
+            <Nav.Item className="nav-hover" as="li">
+              <Nav.Link as={Link} to="/projects" className={url === "/projects" ? "active disabled" : ""} onClick={() => setIsExpanded(false)}>Projects</Nav.Link>
             </Nav.Item>
-            <Nav.Item className="nav-hover">
-              <Nav.Link as={Link} to="/certificates" onClick={() => setIsExpanded(false)}>Certificates</Nav.Link>
+            <Nav.Item className="nav-hover" as="li">
+              <Nav.Link as={Link} to="/certificates" className={url === "/certificates" ? "active disabled" : ""} onClick={() => setIsExpanded(false)}>Certificates</Nav.Link>
             </Nav.Item>
 
             <div className="d-flex align-items-center" id="darkmode">
@@ -58,11 +65,11 @@ const Header = () => {
               </label>
             </div>
 
-            <Nav.Item className="nav-hover">
-              <Nav.Link as={Link} to="/resume" onClick={() => setIsExpanded(false)}>Resume</Nav.Link>
+            <Nav.Item className="nav-hover" as="li">
+              <Nav.Link as={Link} to="/resume" className={url === "/resume" ? "active disabled" : ""} onClick={() => setIsExpanded(false)}>Resume</Nav.Link>
             </Nav.Item>
-            <Nav.Item className="nav-hover">
-              <Nav.Link as={Link} to="/contact" onClick={() => setIsExpanded(false)}>Contact</Nav.Link>
+            <Nav.Item className="nav-hover" as="li">
+              <Nav.Link as={Link} to="/contact" className={url === "/contact" ? "active disabled" : ""} onClick={() => setIsExpanded(false)}>Contact</Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>

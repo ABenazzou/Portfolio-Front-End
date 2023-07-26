@@ -28,12 +28,16 @@ const App = () => {
       document.documentElement.style.setProperty('--background-color', '#303030');
       document.documentElement.style.setProperty('--foreground-color', '#ffffff');
       document.documentElement.style.setProperty('--active-background-color', '#ffffff');
+      document.documentElement.style.setProperty('--hover-background-color', '#303030');
+      document.documentElement.style.setProperty('--secondary-hover-background-color', '#696969');
     }
     else {
 
       document.documentElement.style.setProperty('--background-color', '#ffffff');
       document.documentElement.style.setProperty('--foreground-color', '#000000');
       document.documentElement.style.setProperty('--active-background-color', '#606060');
+      document.documentElement.style.setProperty('--hover-background-color', '#D3D3D3');
+      document.documentElement.style.setProperty('--secondary-hover-background-color', '#D3D3D3');
     }
   }, [isDarkMode])
 
