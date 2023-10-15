@@ -20,6 +20,7 @@ import { State } from "./store/reducers";
 
 const App = () => {
   const [maintenance, setMaintenance] = useState(true);
+
   let isDarkMode = useSelector((state: State) => state.theme);
 
   useEffect(() => {

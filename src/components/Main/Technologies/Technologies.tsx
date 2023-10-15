@@ -27,7 +27,7 @@ const Technologies = () => {
           <MDBTypography tag="h2">Favorite Technologies</MDBTypography>
         </Col>
       </Row>
-      <Row md={4} xs={2} className="justify-content-md-right offset-1">
+      <Row md={5} xs={2} className="justify-content-md-right offset-1">
         {isLoading &&
           <div className='d-flex justify-content-center'>
             <Spinner animation="border" variant={isDarkMode ? "secondary" : "dark"} className="d-flex justify-content-center" />

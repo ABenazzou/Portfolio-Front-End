@@ -41,7 +41,8 @@
 } */
 
 .nav-hover:hover{
-  background-color: var(--hover-background-color);
+  /* background-color: var(--hover-background-color); */
+  cursor: pointer;
 }
 
 img.website-logo {
@@ -96,5 +97,6 @@ img.dark {
 }
 
 .active{
-  background-color: var(--hover-background-color) !important;
+  /* background-color: var(--hover-background-color) !important; */
+  color: var(--foreground-color) !important;
 }
