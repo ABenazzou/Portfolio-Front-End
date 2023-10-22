@@ -2,6 +2,7 @@ import { Dispatch } from "redux"
 import { ActionType } from "../action-types"
 import { Action } from "../actions/themeActions"
 import {Action as adminAction} from '../actions/adminActions';
+import {Action as maintenanceAction} from '../actions/maintenanceActions';
 
 
 export const setTheme = (isDarkMode: boolean) => {
@@ -9,6 +10,15 @@ export const setTheme = (isDarkMode: boolean) => {
         dispatch({
             type: ActionType.THEME,
             payload: isDarkMode,
+        })
+    }
+}
+
+export const setMaintenance = (isMaintenance: boolean) => {
+    return (dispatch: Dispatch<maintenanceAction>) => {
+        dispatch({
+            type: ActionType.MAINTENANCE,
+            payload: isMaintenance,
         })
     }
 }

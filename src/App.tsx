@@ -15,7 +15,7 @@ import Projects from "./components/Projects/Projects";
 import Certificates from "./components/Certificates/Certificates";
 import Resume from "./components/Resume/Resume";
 import Contact from "./components/Contact/Contact";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "./store/reducers";
 import Login from "./components/Authentication/Login";
 import Backoffice from "./components/Backoffice/Backoffice";
@@ -38,9 +38,22 @@ import EditSection from "./components/Backoffice/Section/EditSection";
 import AddProjectTechnologyDomain from "./components/Backoffice/Project/AddProjectTechnologyDomain";
 import AddCertificateDomain from "./components/Backoffice/Certificate/AddCertificateDomain";
 import AddResumeDomain from "./components/Backoffice/Resume/AddResumeDomain";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "./store";
 
 const App = () => {
-  const [maintenance, setMaintenance] = useState(true);
+
+  // let dispatch = useDispatch();
+
+  // const { setMaintenance } = bindActionCreators(actionCreators, dispatch);
+
+  let maintenance = useSelector((state: State) => state.maintenance);
+
+  // const switchMaintenance = () => {
+    // setMaintenance(!maintenance)
+  // };
+
+  // const [maintenance, setMaintenance] = useState(true);
 
   let isDarkMode = useSelector((state: State) => state.theme);
   let isAdmin = useSelector((state: State) => state.isAdmin);
@@ -70,7 +83,39 @@ const App = () => {
         {!maintenance && <Header />}
         <Routes>
           {maintenance ? (
-            <Route path="*" element={<Placeholder />} />
+            <>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="*" element={<Placeholder />} />
+              { isAdmin.isAdmin?<Route path="/backoffice" element={<Backoffice />}/>:<Route path="/" element={<Placeholder />}  />}
+
+              { isAdmin.isAdmin?<Route path="/editProject" element={<EditProject />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addProject" element={<AddProject />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addProjectTechnologyDomain" element={<AddProjectTechnologyDomain />}/>:<Route path="/" element={<Placeholder />}  />}
+
+              { isAdmin.isAdmin?<Route path="/editCertificate" element={<EditCertificate />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addCertificate" element={<AddCertificate />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addCertificateDomain" element={<AddCertificateDomain />}/>:<Route path="/" element={<Placeholder />}  />}
+
+              { isAdmin.isAdmin?<Route path="/editTechnology" element={<EditTechnology />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addTechnology" element={<AddTechnology />}/>:<Route path="/" element={<Placeholder />}  />}
+
+              { isAdmin.isAdmin?<Route path="/editHobby" element={<EditHobby />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addHobby" element={<AddHobby />}/>:<Route path="/" element={<Placeholder />}  />}
+
+              { isAdmin.isAdmin?<Route path="/editDomain" element={<EditDomain />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addDomain" element={<AddDomain />}/>:<Route path="/" element={<Placeholder />}  />}
+
+              { isAdmin.isAdmin?<Route path="/editResume" element={<EditResume />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addResume" element={<AddResume />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addResumeDomain" element={<AddResumeDomain />}/>:<Route path="/" element={<Placeholder />}  />}
+
+              { isAdmin.isAdmin?<Route path="/editBiography" element={<EditBiography />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/addBiography" element={<AddBiography />}/>:<Route path="/" element={<Placeholder />}  />}
+
+              { isAdmin.isAdmin?<Route path="/addSection" element={<AddSection />}/>:<Route path="/" element={<Placeholder />}  />}
+              { isAdmin.isAdmin?<Route path="/editSection" element={<EditSection />}/>:<Route path="/" element={<Placeholder />}  />}
+
+            </>
           ) : (
             <>
               <Route path="/" element={<Home />} />
@@ -79,34 +124,35 @@ const App = () => {
               <Route path="/resume" element={<Resume />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login/>}/>
+          
               { isAdmin.isAdmin?<Route path="/backoffice" element={<Backoffice />}/>:<Route path="/" element={<Home />}  />}
 
-          { isAdmin.isAdmin?<Route path="/editProject" element={<EditProject />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addProject" element={<AddProject />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addProjectTechnologyDomain" element={<AddProjectTechnologyDomain />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/editProject" element={<EditProject />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addProject" element={<AddProject />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addProjectTechnologyDomain" element={<AddProjectTechnologyDomain />}/>:<Route path="/" element={<Home />}  />}
 
-          { isAdmin.isAdmin?<Route path="/editCertificate" element={<EditCertificate />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addCertificate" element={<AddCertificate />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addCertificateDomain" element={<AddCertificateDomain />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/editCertificate" element={<EditCertificate />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addCertificate" element={<AddCertificate />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addCertificateDomain" element={<AddCertificateDomain />}/>:<Route path="/" element={<Home />}  />}
 
-          { isAdmin.isAdmin?<Route path="/editTechnology" element={<EditTechnology />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addTechnology" element={<AddTechnology />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/editTechnology" element={<EditTechnology />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addTechnology" element={<AddTechnology />}/>:<Route path="/" element={<Home />}  />}
 
-          { isAdmin.isAdmin?<Route path="/editHobby" element={<EditHobby />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addHobby" element={<AddHobby />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/editHobby" element={<EditHobby />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addHobby" element={<AddHobby />}/>:<Route path="/" element={<Home />}  />}
 
-          { isAdmin.isAdmin?<Route path="/editDomain" element={<EditDomain />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addDomain" element={<AddDomain />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/editDomain" element={<EditDomain />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addDomain" element={<AddDomain />}/>:<Route path="/" element={<Home />}  />}
 
-          { isAdmin.isAdmin?<Route path="/editResume" element={<EditResume />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addResume" element={<AddResume />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addResumeDomain" element={<AddResumeDomain />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/editResume" element={<EditResume />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addResume" element={<AddResume />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addResumeDomain" element={<AddResumeDomain />}/>:<Route path="/" element={<Home />}  />}
 
-          { isAdmin.isAdmin?<Route path="/editBiography" element={<EditBiography />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/addBiography" element={<AddBiography />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/editBiography" element={<EditBiography />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addBiography" element={<AddBiography />}/>:<Route path="/" element={<Home />}  />}
 
-          { isAdmin.isAdmin?<Route path="/addSection" element={<AddSection />}/>:<Route path="/" element={<Home />}  />}
-          { isAdmin.isAdmin?<Route path="/editSection" element={<EditSection />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/addSection" element={<AddSection />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/editSection" element={<EditSection />}/>:<Route path="/" element={<Home />}  />}
 
             </>
           )}

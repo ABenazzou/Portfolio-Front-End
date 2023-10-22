@@ -12,13 +12,25 @@ import {
   Tabs,
   Tab,
   Button,
+  Form,
 } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../store/reducers";
 import { useLocation, useNavigate } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../store";
 
 const Backoffice = () => {
   const navigate = useNavigate();
+  let dispatch = useDispatch();
+
+  const { setMaintenance } = bindActionCreators(actionCreators, dispatch);
+
+  let maintenance = useSelector((state: State) => state.maintenance);
+
+  const switchMaintenance = () => {
+    setMaintenance(!maintenance)
+  };
 
   const editProject = (
     id: number,
@@ -397,6 +409,7 @@ const Backoffice = () => {
 
   return (
     <Container className={isDarkMode ? "text-white mt-5" : "mt-5"}>
+      <Form.Check checked={maintenance} onChange={switchMaintenance} label="Maintenance Mode"/>
       {//PROJECT-----------------------------------------------------------------------------------
       }
       <Tabs defaultActiveKey={activeTab} onSelect={(key) => handleSelect(key)}>
