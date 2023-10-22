@@ -79,9 +79,7 @@ const App = () => {
               <Route path="/resume" element={<Resume />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login/>}/>
-            </>
-          )}
-          { isAdmin.isAdmin?<Route path="/backoffice" element={<Backoffice />}/>:<Route path="/" element={<Home />}  />}
+              { isAdmin.isAdmin?<Route path="/backoffice" element={<Backoffice />}/>:<Route path="/" element={<Home />}  />}
 
           { isAdmin.isAdmin?<Route path="/editProject" element={<EditProject />}/>:<Route path="/" element={<Home />}  />}
           { isAdmin.isAdmin?<Route path="/addProject" element={<AddProject />}/>:<Route path="/" element={<Home />}  />}
@@ -110,6 +108,9 @@ const App = () => {
           { isAdmin.isAdmin?<Route path="/addSection" element={<AddSection />}/>:<Route path="/" element={<Home />}  />}
           { isAdmin.isAdmin?<Route path="/editSection" element={<EditSection />}/>:<Route path="/" element={<Home />}  />}
 
+            </>
+          )}
+          
         </Routes>
         {!maintenance && <Footer />}
       </div>
