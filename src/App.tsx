@@ -116,7 +116,8 @@ const App = () => {
       {!checking && (
         <div className="theme-bg">
           {}
-          {!maintenance && <Header />}
+          {/* {!maintenance && <Header />} */}
+          <Header />
           <Routes>
             {maintenance ? (
               <>
@@ -375,7 +376,8 @@ const App = () => {
               </>
             )}
           </Routes>
-          {!maintenance && <Footer />}
+          {/* {!maintenance && <Footer />} */}
+          <Footer />
         </div>
       ) 
       }
