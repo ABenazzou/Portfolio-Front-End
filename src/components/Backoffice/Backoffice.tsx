@@ -22,14 +22,32 @@ import { actionCreators } from "../../store";
 
 const Backoffice = () => {
   const navigate = useNavigate();
-  let dispatch = useDispatch();
+  // let dispatch = useDispatch();
 
-  const { setMaintenance } = bindActionCreators(actionCreators, dispatch);
+  // const { setMaintenance } = bindActionCreators(actionCreators, dispatch);
 
-  let maintenance = useSelector((state: State) => state.maintenance);
+  // let maintenance = useSelector((state: State) => state.maintenance);
+  let [maintenance, setMaintenance] = useState(false);
 
-  const switchMaintenance = () => {
-    setMaintenance(!maintenance)
+  useEffect(() => {
+    fetch("/api/maintenance")
+    .then((response) => response.json())
+    .then((data) => setMaintenance(data.maintenanceBool));
+  }, []);
+
+  const switchMaintenance = async () => {
+    const current = !maintenance;
+    setMaintenance(current);
+
+    const options = {
+      method: "PUT",
+      headers: { authorization: `Bearer ${isAdmin.token}` },
+    };
+
+    const url = current?`api/maintenance?maintenance=turnon`:`api/maintenance?maintenance=turnoff`
+    const result = await fetch(url, options);
+    // console.log(result);
+   
   };
 
   const editProject = (
