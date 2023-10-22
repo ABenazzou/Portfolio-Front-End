@@ -37,6 +37,7 @@ const Footer = () => {
               );
             })}
           </Col>
+          
           <Col md={{ span: 4, offset: 4 }} className="d-flex justify-content-center align-items-center">
             {copyright}
           </Col>

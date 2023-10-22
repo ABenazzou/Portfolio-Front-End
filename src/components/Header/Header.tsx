@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <Navbar expand="lg" expanded={isExpanded} bg={isDarkMode ? "dark" : "light"} variant={isDarkMode ? "dark" : "light"} className="fixed-top">
       <Container >
-        <Navbar.Brand as={Link} to="/"> <img src={logo} className={isDarkMode ? "website-logo dark" : "website-logo"} alt="Abenazzou Logo" height="90px" width="auto" /> </Navbar.Brand>
+        <Navbar.Brand as={Link} to="/login"> <img src={logo} className={isDarkMode ? "website-logo dark" : "website-logo"} alt="Abenazzou Logo" height="90px" width="auto" /> </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" onClick={() => setIsExpanded(!isExpanded)} />
 
         <Navbar.Collapse id="navbar-nav">
