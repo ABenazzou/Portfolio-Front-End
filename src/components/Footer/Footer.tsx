@@ -14,7 +14,7 @@ const Footer = () => {
   }
 
   useEffect(() => {
-    fetch("api/section/type/social_media_link")
+    fetch("api/section/type/social_media_link?displayable")
       .then((response) => response.json())
       .then((data) => setSocialMedias(data));
 

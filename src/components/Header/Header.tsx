@@ -11,6 +11,7 @@ import { actionCreators } from "../../store";
 import { State } from "../../store/reducers";
 
 const Header = () => {
+  
   let [isExpanded, setIsExpanded] = useState(false);
   let location = useLocation();
   const [url, setUrl] = useState('');
@@ -71,6 +72,7 @@ const Header = () => {
             <Nav.Item className="nav-hover" as="li">
               <Nav.Link as={Link} to="/contact" className={url === "/contact" ? "active disabled" : ""} onClick={() => setIsExpanded(false)}>Contact</Nav.Link>
             </Nav.Item>
+
           </Nav>
         </Navbar.Collapse>
 

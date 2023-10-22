@@ -17,11 +17,33 @@ import Resume from "./components/Resume/Resume";
 import Contact from "./components/Contact/Contact";
 import { useSelector } from "react-redux";
 import { State } from "./store/reducers";
+import Login from "./components/Authentication/Login";
+import Backoffice from "./components/Backoffice/Backoffice";
+import EditProject from "./components/Backoffice/Project/EditProject";
+import AddProject from "./components/Backoffice/Project/AddProject";
+import AddCertificate from "./components/Backoffice/Certificate/AddCertificate";
+import EditCertificate from "./components/Backoffice/Certificate/EditCertificate";
+import EditTechnology from "./components/Backoffice/Technology/EditTechnology";
+import AddTechnology from "./components/Backoffice/Technology/AddTechnology";
+import EditHobby from "./components/Backoffice/Hobby/EditHobby";
+import AddHobby from "./components/Backoffice/Hobby/AddHobby";
+import EditDomain from "./components/Backoffice/Domain/EditDomain";
+import AddDomain from "./components/Backoffice/Domain/AddDomain";
+import EditResume from "./components/Backoffice/Resume/EditResume";
+import AddResume from "./components/Backoffice/Resume/AddResume";
+import EditBiography from "./components/Backoffice/Biography/EditBiography";
+import AddBiography from "./components/Backoffice/Biography/AddBiography";
+import AddSection from "./components/Backoffice/Section/AddSection";
+import EditSection from "./components/Backoffice/Section/EditSection";
+import AddProjectTechnologyDomain from "./components/Backoffice/Project/AddProjectTechnologyDomain";
+import AddCertificateDomain from "./components/Backoffice/Certificate/AddCertificateDomain";
+import AddResumeDomain from "./components/Backoffice/Resume/AddResumeDomain";
 
 const App = () => {
   const [maintenance, setMaintenance] = useState(true);
 
   let isDarkMode = useSelector((state: State) => state.theme);
+  let isAdmin = useSelector((state: State) => state.isAdmin);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -56,8 +78,38 @@ const App = () => {
               <Route path="/certificates" element={<Certificates/>} />
               <Route path="/resume" element={<Resume />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/login" element={<Login/>}/>
             </>
           )}
+          { isAdmin.isAdmin?<Route path="/backoffice" element={<Backoffice />}/>:<Route path="/" element={<Home />}  />}
+
+          { isAdmin.isAdmin?<Route path="/editProject" element={<EditProject />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addProject" element={<AddProject />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addProjectTechnologyDomain" element={<AddProjectTechnologyDomain />}/>:<Route path="/" element={<Home />}  />}
+
+          { isAdmin.isAdmin?<Route path="/editCertificate" element={<EditCertificate />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addCertificate" element={<AddCertificate />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addCertificateDomain" element={<AddCertificateDomain />}/>:<Route path="/" element={<Home />}  />}
+
+          { isAdmin.isAdmin?<Route path="/editTechnology" element={<EditTechnology />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addTechnology" element={<AddTechnology />}/>:<Route path="/" element={<Home />}  />}
+
+          { isAdmin.isAdmin?<Route path="/editHobby" element={<EditHobby />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addHobby" element={<AddHobby />}/>:<Route path="/" element={<Home />}  />}
+
+          { isAdmin.isAdmin?<Route path="/editDomain" element={<EditDomain />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addDomain" element={<AddDomain />}/>:<Route path="/" element={<Home />}  />}
+
+          { isAdmin.isAdmin?<Route path="/editResume" element={<EditResume />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addResume" element={<AddResume />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addResumeDomain" element={<AddResumeDomain />}/>:<Route path="/" element={<Home />}  />}
+
+          { isAdmin.isAdmin?<Route path="/editBiography" element={<EditBiography />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/addBiography" element={<AddBiography />}/>:<Route path="/" element={<Home />}  />}
+
+          { isAdmin.isAdmin?<Route path="/addSection" element={<AddSection />}/>:<Route path="/" element={<Home />}  />}
+          { isAdmin.isAdmin?<Route path="/editSection" element={<EditSection />}/>:<Route path="/" element={<Home />}  />}
+
         </Routes>
         {!maintenance && <Footer />}
       </div>
