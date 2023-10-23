@@ -25,6 +25,6 @@ jobs:
     - name: Deploy To PM2
       run: |
         npm install
-        cp -r ./* ~/Desktop/Portfolio-Backend-Deploy/
+        cp -r ./* ~/Desktop/Portfolio-Frontend-Deploy/
         pm2 restart PortfolioFrontend
 
