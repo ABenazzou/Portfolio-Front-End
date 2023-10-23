@@ -22,8 +22,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Build
+    - name: Deploy To PM2
       run: |
         npm install
-        npm run build 
-        cp -r ./src/assets/* ./dist/assets/
+        cp -r ./* ~/Desktop/Portfolio-Backend-Deploy/
+        pm2 restart PortfolioFrontend
+
