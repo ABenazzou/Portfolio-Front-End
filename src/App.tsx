@@ -61,6 +61,7 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setMaintenance(data.maintenanceBool);
+        // setMaintenance(false);
         setChecking(false);
       });
   }, []);
