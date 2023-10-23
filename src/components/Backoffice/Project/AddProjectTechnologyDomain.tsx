@@ -150,7 +150,7 @@ const AddProjectTechnologyDomain = () => {
                 value={technology}
                 onChange={(event) => setTechnology(parseInt(event.target.value))}
               >
-                <option key={-1} value={-1}>Do not add Project</option>
+                <option key={-1} value={-1}>Do not add Technology</option>
 
                 {
                     existingTechnologies.map((row) => {

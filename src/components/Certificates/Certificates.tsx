@@ -20,7 +20,7 @@ const Certificates = () => {
 
 
   useEffect(() => {
-    fetch("api/certificate/latest")
+    fetch("api/certificate")
       .then((response) => response.json())
       .then((data) => setCertificates(data))
       .then(() => setIsLoading(false));

@@ -10,6 +10,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer";
 import { Container, Tabs, Tab, Row, Col, Button, Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { State } from "../../store/reducers";
+import { format } from 'date-fns';
 
 const Resume = () => {
   let [resume, setResume] = useState<any>(null);
@@ -55,17 +56,24 @@ const Resume = () => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener('resize', handleResize)
 
-    fetch(`api/domain`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data) {
-          // console.log(data)
-          // console.log(data[0].name)
-          setCategories(data);
-          setResumeDomain(data[0].name); // default
-        }
-      })
-      .then(() => setIsLoading(false));
+
+    // fetch(`api/domain`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     if (data) {
+    //       console.log(data)
+    //       console.log(data[0].name)
+    //       setCategories(data);
+    //       setResumeDomain(data[0].name); // default
+    //     }
+    //   })
+    //   .then(() => setIsLoading(false));
+
+    // single resume for now
+    setCategories([{id: 1, name: "Generic", logo: "undefined"}]);
+    setResumeDomain("Generic");
+    setIsLoading(false);
+
     // console.log(resumeDomain)
     // console.log("in");
 
@@ -77,13 +85,17 @@ const Resume = () => {
       setIsLoadingTab(true);
       // console.log(categories)
       // console.log(resumeDomain)
-      fetch(`api/domain?name=${resumeDomain}`)
+
+      // fetch(`api/domain?name=${resumeDomain}`)
+      //generic
+      fetch(`api/resume/6`)
         .then((response) => response.json())
         .then((data) => {
-          setResume(data.resume);// even null should be considered
-          if (data.resume == null) {
+          setResume(data);// even null should be considered
+          if (data.pdf == null) {
             setIsLoadingTab(false);// no need to wait for PDF
           }
+         
         });
       // .then(() => setIsLoadingTab(false));
 
@@ -135,7 +147,7 @@ const Resume = () => {
     //     </ul>
     //   </div>
     <Container className="mt-5">
-
+      
       {isLoading &&
         <div className='d-flex justify-content-center'>
           <Spinner animation="border" variant={isDarkMode ? "secondary" : "dark"} className="d-flex justify-content-center" />
@@ -152,8 +164,8 @@ const Resume = () => {
               }
               {resume && !isLoadingTab &&
                 <Row>
-                  <Col className={isDarkMode ? "justify-content-md-center mt-4 text-white " : "justify-content-md-center mt-4"} xs={{ span: 12, offset: 2 }} md={{ span: 12, offset: 4 }}>
-                    This resume was last updated on: {resume.lastUpdated}
+                  <Col className={isDarkMode ? "justify-content-md-center mt-4 text-white " : "justify-content-md-center mt-4"} xs={{ span: 12, offset: 2 }} md={{ span: 12, offset: 4 }} style={{textDecoration: "underline"}}>
+                    This resume was last updated on: {format(new Date(resume.lastUpdated), 'MMMM do, yyyy')}
                   </Col>
                 </Row>
               }
@@ -162,6 +174,7 @@ const Resume = () => {
 
                   <Col xs={{ span: 1, offset: 1 }} md={{ span: 1, offset: 0 }} className="mb-3">
                     <Document file={resume.pdf} >
+                    {/* <Document file={resume} > */}
                       <Page pageNumber={1} renderTextLayer={false} className="resumeEmbedding" renderAnnotationLayer={false} width={width * 0.6} onLoadSuccess={onDocumentLoadSuccess} />
                     </Document>
 

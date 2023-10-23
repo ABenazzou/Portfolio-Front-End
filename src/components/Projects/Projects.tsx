@@ -25,8 +25,18 @@ const Projects = () => {
   let [isLoading, setIsLoading] = useState(true);
   let [isLoadingTab, setIsLoadingTab] = useState(true);
 
-  const handleProjectClick = (link: string) => {
-    window.open(link, '_blank', 'noopener,noreferrer');
+  const handleProjectClick = async (project: any) => {
+
+    window.open(project.github_link, '_blank', 'noopener,noreferrer');
+
+    const options = {
+      method: "PATCH",      
+    };
+
+    let url = `api/project/visit/${project.id}`
+
+    let response = await fetch(url, options)
+
   };
 
   const handleSelect = (key: string | null) => {
@@ -180,8 +190,8 @@ const Projects = () => {
                 {projects.map((project) => {
                   return (
                     <Col key={project.id} className="mb-3 align-items-stretch">
-                      <Card bg={isDarkMode ? 'dark' : 'light'} text={isDarkMode ? 'white' : 'dark'} className="d-flex align-items-center pointerHover justify-content-center" onClick={() => handleProjectClick(project.github_link)}>
-                        <Card.Img src={project.thumbail} />
+                      <Card bg={isDarkMode ? 'dark' : 'light'} text={isDarkMode ? 'white' : 'dark'} className="d-flex align-items-center pointerHover justify-content-center" onClick={() => handleProjectClick(project)}>
+                        <Card.Img src={project.thumbnail} />
                         <Card.Title className="pt-3 text-center pb-1">{project.name}</Card.Title>
                       </Card>
                     </Col>

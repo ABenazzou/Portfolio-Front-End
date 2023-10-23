@@ -2,7 +2,7 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import logo from "src/assets/Logo-Light.svg";
+import logo from "src/assets/images/Logo-Light.svg";
 import { BsMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 
 import { useDispatch, useSelector } from "react-redux";
