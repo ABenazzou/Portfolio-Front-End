@@ -21,10 +21,9 @@
 } */
 
 .descriptionContent {
-  font-size: x-large;
+  font-size: large;
   padding: 20px;
   font-family: 'Inter';
-  font-weight: bold;
 }
 
 .portfolioButton {
