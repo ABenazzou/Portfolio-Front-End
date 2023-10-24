@@ -9,6 +9,7 @@ export default defineConfig({
       src: "/src",
     }
   },
+  publicDir: 'public',
   server: {
     proxy: {
       '/api' : {
