@@ -37,6 +37,7 @@ import AddResumeDomain from "./components/Backoffice/Resume/AddResumeDomain";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "./store";
 import { Spinner } from "react-bootstrap";
+import NotFound from "./components/shared/NotFound";
 
 const App = () => {
   // let dispatch = useDispatch();
@@ -123,7 +124,12 @@ const App = () => {
             {maintenance ? (
               <>
                 <Route path="/login" element={<Login />} />
-                <Route path="*" element={<Placeholder />} />
+                <Route path="/" element={<Placeholder />} />
+                <Route path="/projects" element={<Placeholder />} />
+                <Route path="/certificates" element={<Placeholder />} />
+                <Route path="/resume" element={<Placeholder />} />
+                <Route path="/contact" element={<Placeholder />} />
+                <Route path="*" element={<NotFound />} />
                 {isAdmin.isAdmin ? (
                   <Route path="/backoffice" element={<Backoffice />} />
                 ) : (
@@ -253,6 +259,7 @@ const App = () => {
                 <Route path="/resume" element={<Resume />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="*" element={<NotFound />} />
 
                 {isAdmin.isAdmin ? (
                   <Route path="/backoffice" element={<Backoffice />} />
