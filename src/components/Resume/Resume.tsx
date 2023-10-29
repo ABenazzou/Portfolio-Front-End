@@ -70,8 +70,8 @@ const Resume = () => {
     //   .then(() => setIsLoading(false));
 
     // single resume for now
-    setCategories([{id: 1, name: "Generic", logo: "undefined"}]);
-    setResumeDomain("Generic");
+    setCategories([{id: 1, name: "Classical Resume", logo: "undefined"}, {id: 2, name: "Modern Resume", logo: "undefined"}]);
+    setResumeDomain("Classical Resume");
     setIsLoading(false);
 
     // console.log(resumeDomain)
@@ -88,7 +88,8 @@ const Resume = () => {
 
       // fetch(`api/domain?name=${resumeDomain}`)
       //generic
-      fetch(`api/resume/6`)
+      const url = resumeDomain == "Classical Resume"? "api/resume/6":"api/resume/8";
+      fetch(url)
         .then((response) => response.json())
         .then((data) => {
           setResume(data);// even null should be considered
